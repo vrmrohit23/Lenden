@@ -1,0 +1,117 @@
+import React, { useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { Input, Commonbutton, Logo,Input_Pass_field } from './index'
+import  authobject from '../appwrite/authenticate'
+import { login as locallogin } from '../contexts/authslice'
+import { useForm } from 'react-hook-form'
+import documentobject from '../appwrite/getdata'
+import { setexpenses } from '../contexts/expenseslice'
+
+function Login() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { register,handleSubmit,formState:{errors }} = useForm()
+  
+  const [error, seterror] = useState(null)
+  const loginhandle = async (data) => {
+    seterror(null)
+    try {
+      const response = await authobject.login(data)
+      if (response) {
+        const userdata = await authobject.getacc()
+        console.log(userdata)
+        if (userdata) {
+
+          dispatch(locallogin(userdata))
+          let docResponse = await documentobject.listdocuments(userdata.$id)
+          if(docResponse){
+            dispatch(setexpenses(docResponse.documents))
+          }
+        }
+        navigate('/')
+      }
+      else {
+        // console.log('not logged in')
+        seterror("Invalid Email or Password")
+      }
+    } catch (error) {
+      seterror(error.message)
+    }
+  }
+  return (
+    <div className='flex items-center justify-center w-full my-20 '>
+      <div className=' bg-gray-100 rounded-xl p-3 border border-black/10 sm:p-10 mx-2'>
+        {/* <div className='mb-2 flex items-center flex-col'>
+          <span className='inline-block'>
+
+            <Logo />
+          </span>
+       
+        </div> */}
+        <h2 className='text-bold text-2xl text-center mr-2'>Sign in to your account</h2>
+        
+        {error && <p className='text-red-600 text-center mt-3'>{error}</p>}
+        <form onSubmit={handleSubmit(loginhandle)} className='mt-8 mb-5'>
+
+          <div className=''>
+          
+            <Input 
+            label='Email: '
+            placeholder='Enter you email'
+            type = 'email'
+            classname = 'inline-block w-full '
+            {...register('email',{
+              required:true,
+              validate:{
+              pattern: (value) =>/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                "Email address must be a valid address",
+              }
+            })}
+             />
+            <Input_Pass_field
+            classname = ' w-full '
+            {...register('password',{
+              required:'field cannot be empty',
+              minLength: {
+                value: 8,
+                message: 'Password must have at least 8 characters'
+              }
+            })}
+            />
+            {/* <Input 
+            label='Password: '
+            placeholder='Enter Password'
+            type = {showpassword?'text':'password'}
+            classname = 'inline-block w-full !mb-1 '
+            {...register('password',{
+              required:'field cannot be empty',
+              minLength: {
+                value: 8,
+                message: 'Password must have at least 8 characters'
+              }
+            })}
+            /> */}
+            {/** This div is for making the eye button in the password field to reveal and unreveal the password */}
+            
+            
+            
+
+            {errors.password && <p className='text-red-700 font-semibold '>{errors.password.message}</p>}
+          </div>
+          <Commonbutton 
+          text='Login'
+          children = 'Sign In'
+          type = 'submit'
+          classname = 'bg-blue-600 text-white w-full hover:bg-blue-700 mt-8'
+          />
+        </form>
+        <div className='text-center'>
+          <Link to={'/signup'} className='font-semibold text-blue-500 underline'>Create a account &nbsp;/ &nbsp; Sign Up</Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Login
