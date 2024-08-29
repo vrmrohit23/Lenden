@@ -45,6 +45,7 @@ function Expenseform({
     setvalues();
     
   }, [editdetails])
+
   const handleimage = (e) => {
     const file = e.target.files[0]
     if (file) {
@@ -54,10 +55,11 @@ function Expenseform({
       setimageurl(null)
     }
   }
- 
+  
+  
   // form submission function
   const formsubmit = async (data) => {
-    setviewstate(false); setvalues(); setimageurl(null);
+    setviewstate(false);  setimageurl(null);
     
     if (editdetails) {
       // const file = data.image[0] ? await documentobject.uploadfile(data.image[0]) : undefined;
@@ -70,9 +72,10 @@ function Expenseform({
       // if (updatepostresponse) {
         delete (data.image);
         // const updateobject = { userid: editdetails.userid, $id: editdetails.$id, ...data, featuredimage: file ? file.$id : undefined,Status:editdetails.Status }
-        const updateobject1 = { userid: editdetails.userid, $id: editdetails.$id, ...data, Status:editdetails.Status }
+        const updateobject1 = { userid: editdetails.userid, $id: editdetails.$id, ...data,Amount:Number.parseInt(data.Amount) }
         dispatch(updateexpense(updateobject1))
       // }
+      seteditdetails(null)
     }
     else {
       // const file = data.image[0] ? await documentobject.uploadfile(data.image[0]) : undefined;
@@ -80,9 +83,11 @@ function Expenseform({
       // const createresponse = await documentobject.createdocument({ ...data, featuredimage: file ? file.$id : undefined,userid:user.$id })
       // if (createresponse) {
         delete (data.image);
-        
         // const createobject = {userid:user.$id, $id: createresponse.$id, ...data, featuredimage: file ? file.$id : undefined }
-        const createobject1 = {userid:user.$id, $id: ID.unique(), ...data }
+
+        data.Amount = Number.parseInt(data.Amount);
+        console.log(data.Amount);
+        const createobject1 = {userid:user.$id, $id: ID.unique(), ...data,Amount:data.Amount }
         dispatch(addexpense(createobject1))
       // }
     }
@@ -143,14 +148,14 @@ function Expenseform({
                 <textarea name="" id="textarea" className='border-2 w-full mt-2 pt-2 px-4 outline-none focus:border-blue-600' rows="3" placeholder='if you wanna add a note' {...register('Desc', {
                  
                 })}></textarea>
-                <Input classname=' w-full rounded-none' label='Amount' labelclassname=' font-semibold mt-4' placeholder='Enter Amount in rs ' {...register('Amount', {
+                <Input classname=' w-full rounded-none'  type='number' label='Amount' labelclassname=' font-semibold mt-4' placeholder='Enter Amount in rs ' {...register('Amount', {
                   required: true,
                 })} />
                 <Selectfield 
                 label='Payment-Method' 
-                options={['Cash', 'Credit-Card', 'Borrowings', 'Debit-Card']} 
+                options={['Cash', 'Credit-Card', 'Borrowings', 'Debit-Card',"Google Pay/Paytm"]} 
                 classname='w-full rounded-none text-center font-semibold  tracking-wide' 
-                {...register('Payment-Method', {
+                {...register('Payment_Method', {
                   required: true,
                 })} />
 

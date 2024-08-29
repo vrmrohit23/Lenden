@@ -1,26 +1,21 @@
 import React, { useState,useEffect } from 'react'
 import { Expenseform, Selectfield, Expenserows, Modalbox,Filter } from './index'
-
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
-
+import useFilters from './Hooks/useFilters'
 import useSetExpenses from './Hooks/useSetExpenses'
 function Expenses() {
-
-  // const user = useSelector((state) => state.auth.userdata)
-  const {expenseslist,setselectedfilters,months,month,setmonth,year,setyear,years} = useSetExpenses
-  ();
-  const [details,setdetails] = useState('');
-  const [viewstate, setviewstate] = useState(false)
-  const [editdetails, seteditdeatils] = useState(null)
+  const {expenseslist,setselectedfilters,months,month,setmonth,year,setyear,years} = useSetExpenses();
+  const {details,setdetails,viewstate,setviewstate,editdetails,seteditdeatils} = useFilters();
   const filtercategory = [
     'Category','P_Method','Amount','Date'
   ]
   const filteroptions = {
     "Category":["Travel","Hotel","Fuel","Food","Other"],
-    "P_Method":["Cash","Credit-Card","Debit-Card","Borrowings"],
+    "P_Method":["Cash","Credit-Card","Debit-Card","Borrowings","Google Pay/Paytm"],
   }
-  console.log(expenseslist)
+  // console.log(expenseslist)
+ 
   
   let totalexpense = 0;
 
@@ -40,7 +35,7 @@ function Expenses() {
         </div>
         
       <Filter categoryoptions={filtercategory} filteroptions={filteroptions} month={month} setselectedfilters={setselectedfilters}/>
-        <section className="px-3 py-10 mx-2 mb-20  bg-gradient-to-r from-green-300 to to-blue-400 rounded-lg lg:px-20 lg:mx-20 max-h-96 overflow-auto sm:mx-10 sm:px-10">
+        <section className=" py-10  mb-20  bg-gradient-to-r from-green-300 to to-blue-400 rounded-lg lg:px-20 lg:mx-20 max-h-96 overflow-auto sm:mx-10 sm:px-10">
 
           <table className=' rounded-lg w-full px-4 bg-transparent '>
             <thead className=''>
@@ -56,7 +51,7 @@ function Expenses() {
             <tbody>
 
               {expenseslist.map((expense) => {
-                totalexpense = totalexpense + Number.parseInt(expense.Amount);
+                totalexpense = totalexpense + expense.Amount;
                 return <Expenserows expense={expense} seteditdetails={seteditdeatils} setviewstate={setviewstate} key={expense.$id}  setdetails={setdetails}/>
 
               }

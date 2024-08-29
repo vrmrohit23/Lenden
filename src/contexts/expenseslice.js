@@ -10,7 +10,6 @@ export const expenseslice = createSlice({
     reducers:{
         addexpense:(state,action)=>{
             state.expenseslist = [...state.expenseslist,{...action.payload}]
-           
         },
         deleteentry:(state,action)=>{
             state.expenseslist = state.expenseslist.filter((option)=>action.payload !== option.$id)

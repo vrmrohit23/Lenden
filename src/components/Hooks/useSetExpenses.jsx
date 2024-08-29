@@ -1,5 +1,6 @@
 import React,{useState,useEffect, useMemo} from 'react'
 import { useSelector } from 'react-redux'
+
 function useSetExpenses() {
     let expenseslist = useSelector((state) => state.expense.expenseslist)
     // const {year,setyear,years} = useSetyear()
@@ -12,7 +13,7 @@ function useSetExpenses() {
   
     let years = useMemo(()=>
       [...new Set(expenseslist.map((item)=>item.Year))],
-    [expenseslist]);;
+    [expenseslist]);
    
     // state for filtering based on selected year
 
@@ -20,7 +21,7 @@ function useSetExpenses() {
     const [month, setmonth] = useState()
      
     const [year, setyear] = useState()
-  
+    
     useEffect(() => {
       if (months.length > 0 && !months.includes(month)) {
         // If the current month is not in the updated months array, reset to the first available month
@@ -33,8 +34,10 @@ function useSetExpenses() {
     }, [months,years]);
  
     
+   
     let filterexpense = expenseslist;
     useEffect(()=>{
+      console.log("we are in filters useeffect")
       if(selectedfilters["Category"] !== undefined && selectedfilters["Category"].length > 0){
         console.log("checking Category")
         let Categoryfilter = []
@@ -56,17 +59,16 @@ function useSetExpenses() {
   }
   if(selectedfilters["Date"] !== undefined){
     filterexpense = filterexpense.filter((items) => items.Day === selectedfilters["Date"] )
-    
   }
   
   setfiltered(filterexpense)
-  
-},[selectedfilters,month])
+},[selectedfilters,month,expenseslist])
 
 
 expenseslist = filtered;
 
 expenseslist = expenseslist.filter((expense) => expense.Month === month && expense.Year === year)
+
 
 
 return {expenseslist,setselectedfilters,months,month,setmonth,year,setyear,years}

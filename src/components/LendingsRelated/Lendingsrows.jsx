@@ -2,8 +2,8 @@ import React from 'react'
 import Commonbutton from '../commonbutton/commonbutton'
 import documentobject from '../../appwrite/getdata'
 import { useDispatch } from 'react-redux'
-import { deleteentry } from '../../contexts/expenseslice'
-import { updateexpense } from '../../contexts/expenseslice'
+import { deleteentry } from '../../contexts/lendingsSlice'
+import { updateexpense } from '../../contexts/lendingsSlice'
 function Lendingsrows({ data, seteditdetails, setviewstate,setdetails}) {
   const dispatch = useDispatch()
   // document status updation function
@@ -33,10 +33,7 @@ function Lendingsrows({ data, seteditdetails, setviewstate,setdetails}) {
         <i class="fa-regular fa-pen-to-square " ></i>
       </td>
       <td className='  border-x-2 border-t-2 border-spacing-14 bg-gray-200 border-gray-100 p-0 duration-200 text-center  hover:text-red-500 hover:bg-slate-800 text-base cursor-pointer sm:text-xl' onClick={deletelending}>
-
-
-        <i class="fa-regular fa-trash-can" />
-
+      <i class="fa-regular fa-trash-can" />
       </td>
       
       

@@ -19,8 +19,6 @@ function Lendings() {
   const filteroptions = {
     "Category":["Travel","Hotel","Fuel","Food","Other"],
     "P_Method":["Cash","Credit-Card","Debit-Card","Borrowings"],
-    
-  
   }
 
   
