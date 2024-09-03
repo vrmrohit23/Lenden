@@ -50,13 +50,15 @@ import config from "../config";
     }
     async listdocuments(userid){
         try {
-            // console.log(userid)
+            console.log(userid)
             return await this.database.listDocuments(
-                config.database,config.lendings,
+                config.database,config.lendings,[
                 Query.equal("userid",[userid])
+                ]
             )
         } catch (error) {
             console.log("appwrite error " + error)
+            throw new Error(error)
         }
     }
     // for admin files

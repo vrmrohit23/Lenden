@@ -17,11 +17,11 @@ const App = () => {
     authobject.getacc().then((response) => {
       if (response) {
         dispatch(login(response))
-        documentobject.listdocuments()
+        console.log(response)
+        documentobject.listdocuments(response.$id)
           .then((resolve) => {
             if (resolve) {
               dispatch(setexpenses(resolve.documents))
-              
               }})
             }
             else{
@@ -32,7 +32,7 @@ const App = () => {
             }
           })
           .catch((err) =>
-            console.log('Error occure : ', err)
+            console.log('Error occur : ', err)
         )
         .finally(()=>{
             setloading(false)

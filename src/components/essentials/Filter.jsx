@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 
 function Filter({ categoryoptions = [], filteroptions, month ,setselectedfilters}) {
@@ -50,7 +51,7 @@ function Filter({ categoryoptions = [], filteroptions, month ,setselectedfilters
         <>
             <div className='flex justify-center sm:px-40 '>
                 <button className='text-lg px-8 shadow-lg rounded-3xl mb-1 py-1 duration-200 font-bold bg- hover:text-white  hover:bg-teal-600 sm:text-xl' onClick={() => setdisplay(true)}>
-                    <i class="fa-solid fa-filter"></i>  Filters
+                    <FontAwesomeIcon icon={"fa-solid fa-filter"}/>  Filters
                 </button>
             </div>
             <div className={'fixed  inset-0 justify-center w-full h-full items-center backdrop-blur-sm bg-black bg-opacity-60 z-50 ' + (display ? 'flex' : 'hidden')} >

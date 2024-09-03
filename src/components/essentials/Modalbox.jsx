@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 
 function Modalbox({show = false,setshow,details}) {
@@ -8,9 +9,8 @@ function Modalbox({show = false,setshow,details}) {
         <div className='flex items-center justify-between'>
 
         <p className='text-white my-5 mx-5 py-1 px-3 text-xl font-bold italic tracking-wide'>Note </p>
-        <button className=' bg-gray-800 text-white  rounded-lg my-5 mx-5 py-1 px-3' onClick={()=>setshow(false)}><i class="fa-solid fa-x"></i></button>
+        <button className=' bg-gray-800 text-white  rounded-lg my-5 mx-5 py-1 px-3' onClick={()=>setshow(false)}><FontAwesomeIcon icon={"fa-solid fa-x"}/></button>
         </div>
-
       <hr />
       <div className='px-4 py-4 sm:px-10 sm:py-10'>
 

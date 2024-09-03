@@ -32,11 +32,11 @@ function Expenseform({
     setValue('Day', editdetails?.Day || thisday)
     setValue('Month', editdetails?.Month || setmonthlocal(thismonth))
     setValue('Year', editdetails?.Year || thisyear)
-    setValue('category', editdetails?.category || "")
+    setValue('category', editdetails?.category || "Food")
     setValue('Desc', editdetails?.Desc || "")
     setValue('Amount', editdetails?.Amount || "")
     setValue('image', editdetails?.featuredimage || "")
-    setValue('Payment-Method', editdetails?.Payment_Method || "")
+    setValue('Payment-Method', editdetails?.Payment_Method || "Cash")
     if (editdetails?.featuredimage) {
       setimageurl(documentobject.getfilepreview(editdetails.featuredimage))
     }

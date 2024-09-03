@@ -1,5 +1,6 @@
 import { Client,Databases, Query,Storage,ID} from "appwrite";
 import config from "../config";
+import { useSelector } from "react-redux";
 
  class documentservice{
     client = new Client();
@@ -50,10 +51,12 @@ import config from "../config";
     }
     async listdocuments(userid){
         try {
-            // console.log(userid)
+            console.log(userid)
+            
             return await this.database.listDocuments(
-                config.database,config.expenses,
+                config.database,config.expenses,[
                 Query.equal("userid",[userid])
+                ]
             )
         } catch (error) {
             console.log("appwrite error " + error)

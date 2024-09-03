@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    lendingslist:[]
+    lendingslist:[],
+    loaded:false
 }
 
 export const lendingSlice = createSlice({
@@ -9,13 +10,14 @@ export const lendingSlice = createSlice({
     initialState,
     reducers:{
         addlending:(state,action)=>{
-            state.lendingslist = [...state.lendingslist,{...action.payload}]
+            state.lendingslist.push(action.payload)
         },
         deleteentry:(state,action)=>{
             state.lendingslist = state.lendingslist.filter((option)=>action.payload !== option.$id)
         },
         setlendings:(state,action)=>{
             state.lendingslist = action.payload 
+            state.loaded = true;
         },
         updatelending:(state,action)=>{
             state.lendingslist = state.lendingslist.map((option)=>{
@@ -26,13 +28,13 @@ export const lendingSlice = createSlice({
             })
         },
         updaterepayments:(state,action)=>{
-            const {id,repaymentsmodified} = action.payload;
+            const {index,repaymentsmodified} = action.payload;
             state.lendingslist[index] = {...state.lendingslist[index],repayments:repaymentsmodified}
         }
         
     }
 })
 
-export const {setexpenses,deleteentry,updateexpense,addexpense} = lendingSlice.actions;
+export const {setlendings,deleteentry,updatelending,addlending,updaterepayments} = lendingSlice.actions;
 
 export default lendingSlice.reducer

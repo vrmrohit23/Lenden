@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout as locallogout } from '../../contexts/authslice'
 import authobject from '../../appwrite/authenticate'
 import { Commonbutton } from '../index'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function Header() {
   const authstatus = useSelector((state) => state.auth.status)
   const [theme, settheme] = useState('dark')
@@ -68,7 +69,9 @@ function Header() {
 
       <nav className="bg-gray-800 p-4 shadow-lg sm:flex  justify-between ">
      
-        <button className='text-white sm:hidden ' onClick={togglenavbar} > <i class="fa-solid fa-bars-staggered " style={{color:'white', fontSize:'28px'}}></i></button>
+        <button className='text-white sm:hidden text-2xl' onClick={togglenavbar} > 
+        <FontAwesomeIcon icon="fa-solid fa-bars-staggered" />
+        </button>
         {/* <div className=' ' > */}
 
           <ul className=" space-x-0 pt-4 pr-6 sm:flex sm:space-x-4 sm:items-center sm:w-auto sm:pr-0 sm:pt-0 bg-gray-800 sm:static  sm:h-auto   absolute w-screen h-screen  duration-500 " style={{ left: '-100vw' }} ref={ulref}>

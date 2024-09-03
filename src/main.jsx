@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
-import { Home, Contact, Login, Signup, Expenses,Admin } from './components/index.js'
+import { Home, Contact, Login, Signup, Expenses,Admin,Lendings } from './components/index.js'
 import { Provider } from 'react-redux'
 import store from './contexts/store.js'
 import Protected from './components/protected/Protected.jsx'
@@ -19,7 +19,7 @@ const router = createBrowserRouter(
       <Route path='signup' element={<Signup />}></Route>
       <Route path='expenses' element={<Protected authentication={true}><Expenses /></Protected>}
       ></Route>
-      <Route path='lendings' element={<Protected authentication={true}><Expenses /></Protected>}
+      <Route path='lendings' element={<Protected authentication={true}><Lendings /></Protected>}
       ></Route>
     
       

@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Commonbutton from '../commonbutton/commonbutton'
 import documentobject from '../../appwrite/getdata'
 import { useDispatch } from 'react-redux'
 import { deleteentry } from '../../contexts/lendingsSlice'
-import { updateexpense } from '../../contexts/lendingsSlice'
-function Lendingsrows({ data, seteditdetails, setviewstate,setdetails}) {
+import { updatelending } from '../../contexts/lendingsSlice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Repayments_rows from './Repayments_rows'
+
+function Lendingsrows({ data, seteditdetails, setviewstate, setdetails }) {
   const dispatch = useDispatch()
+  const [expand, setexpand] = useState(false);
+  const [expand_Repayment, setexpand_Repayment] = useState(false)
+  console.log(data)
+
   // document status updation function
   // const Approve_Reject = async (action) => {
   //   const response = await documentobject.updatedocument(expense.$id,{Status:action})
@@ -18,26 +25,86 @@ function Lendingsrows({ data, seteditdetails, setviewstate,setdetails}) {
   const deletelending = async () => {
     // let deleteresponse = await documentobject.deletedocument(expense.$id)
     // if (deleteresponse) {
-      dispatch(deleteentry(data.$id))
+    dispatch(deleteentry(data.$id))
     // }
   }
+  let colors = ["bg-green-500", "bg-blue-500",]
   return (
-    <tr >
-      <td className='border-2 bg-gray-200 max-w-12 border-gray-100 text-center text-xs sm:text-base'>{data.Day + "-" + data.Month + "-" + data.Year}</td>
-      <td className='border-2  text-center bg-gray-700 border-gray-100 hover:bg-slate-800 hover:border-orange-600 cursor-pointer' onClick={()=>{setdetails(data.Desc || 'empty')}}> <span className=' text-white   text-base sm:px-2 sm:text-xl' ><i class="fa-solid fa-plus"></i>
-      </span></td>
-      <td className='border-2 max-h-7 bg-gray-200 border-gray-100 text-center max-w-10 text-xs sm:text-base'>{data.category}</td>
-      <td className={`border-2 bg-gray-200 max-w-10 border-gray-100 text-center text-xs sm:text-base`}>{data.Payment_Method}</td>
-      <td className='border-2 bg-gray-200 border-gray-100 text-center text-xs sm:text-base'>{data.Amount}</td>
-      <td className='  border-x-2 in  border-t-2 bg-gray-200 border-gray-100 p-0 duration-200 text-center  hover:text-green-400 hover:bg-slate-800 text-base cursor-pointer sm:text-xl ' onClick={() => { seteditdetails(data); setviewstate(true) }}>
-        <i class="fa-regular fa-pen-to-square " ></i>
-      </td>
-      <td className='  border-x-2 border-t-2 border-spacing-14 bg-gray-200 border-gray-100 p-0 duration-200 text-center  hover:text-red-500 hover:bg-slate-800 text-base cursor-pointer sm:text-xl' onClick={deletelending}>
-      <i class="fa-regular fa-trash-can" />
-      </td>
-      
-      
-    </tr>
+
+    <div className='rounded-lg   border-x-4  px-2 py-1 shadow-lg mb-5 border-sky-600  bg-gray-300 bg-opacity-20 sm:px-5 sm:mx-5'>
+      <div className={'flex justify-between w-auto ' + (expand ? 'mb-4' : '')}>
+        <div className='mr-6 sm:mr-10'>
+          <p className='text-xl font-bold text-transparent  text-yellow-600   rounded-full font-serif  flex items-center  flex-wrap'>
+            <p className='font-normal text-base text-slate-400 italic'>
+              Borrower:&nbsp;
+            </p>
+            {data.Borrower_or_Lender
+            }
+          </p>
+          <p className='text-md italic font-semibold text-slate-400'>
+            {data.Day + "-" + data.Month + "-" + data.Year}
+          </p>
+        </div>
+        <div className='flex flex-col items-end'>
+          <div className=''>
+
+            <span className={'  font-bold font-mono  mr-2 text-nowrap ' + (data.Repayments.length > 0 ? 'line-through text-md' : 'text-green-600 text-xl')}>
+              {data.Amount} {data.Repayments.length > 0 ? '' : 'Rs'}
+            </span>
+            {data.Repayments.length > 0 &&
+              <span className='text-xl text-nowrap text-green-600 text-opacity-80 font-bold  '>
+                {data.Amount - 100} Rs
+              </span>
+            }
+          </div>
+          <div>
+
+            <span className={'text-xs  rounded-full px-1 text-white  font-semibold ' + (data.Method == 'Cash' ? 'bg-green-500' : 'bg-blue-500')}>
+              {data.Method}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className={(expand ? '' : 'hidden')}>
+        <div className='flex justify-between flex-wrap'>
+          <div>
+            <span className='text-blue-500 font-semibold mr-1'>
+              Repayments
+            </span>
+            <FontAwesomeIcon title='expand/create' className={'text-lime-300 border-2 text-sm border-lime-700 rounded-full cursor-pointer hover:bg-black duration-300 '+(expand_Repayment?'transform rotate-45':'')} icon={'fa-solid  fa-plus'}
+              onClick={(e) => {
+                
+               setexpand_Repayment((prev)=>!prev)
+              }} />
+          </div>
+          <div className='flex justify-end space-x-4'>
+            <div title='Edit' className='   p-0 duration-200 text-center  hover:text-green-600  text-base cursor-pointer sm:text-xl ' onClick={() => { seteditdetails(expense); setviewstate(true) }}>
+              <FontAwesomeIcon icon="fa-regular fa-pen-to-square" />
+            </div>
+            <div title='delete' className='  bg-transparent  p-0 duration-200 text-center  hover:text-red-500  text-base cursor-pointer sm:text-xl' onClick={deletelending}>
+              <FontAwesomeIcon icon="fa-regular fa-trash-can" />
+            </div>
+          </div>
+        </div>
+        {expand_Repayment && 
+        <Repayments_rows repayments={data.Repayments}/>
+        } 
+        {data.Purpose != '' && <>
+          <span className='text-slate-400 block'>Note: </span>
+          <p className='bg-gray-300  px-2 py-1 rounded-lg border-2 border-black mb-4 max-h-10 overflow-auto '>{data.Purpose}</p>
+        </>}
+        <p className='text-slate-400 mb-4'>Return(Expected): <span className='text-green-600'>{data.Return}</span></p>
+      </div>
+      <div className='relative text-center font-bold  '>
+
+        <span className={'text-blue-500 text-sm absolute -bottom-4  b rounded-full cursor-pointer transform   duration-200 bg-white px-2 bg-opacity-90  hover:scale-125 shadow-xl ' + (expand ? 'rotate-180' : '')} onClick={() => setexpand((prev) => !prev)}>
+          <FontAwesomeIcon icon="fa-solid fa-chevron-down" />
+        </span>
+
+      </div>
+
+    </div>
+
   )
 }
 
