@@ -27,14 +27,15 @@ export const lendingSlice = createSlice({
                 return option;
             })
         },
-        updaterepayments:(state,action)=>{
-            const {index,repaymentsmodified} = action.payload;
-            state.lendingslist[index] = {...state.lendingslist[index],repayments:repaymentsmodified}
+        update_Repayments:(state,action)=>{
+            const {index,repayments} = action.payload;
+            console.log(index)
+            state.lendingslist[index].Repayments = repayments;
         }
         
     }
 })
 
-export const {setlendings,deleteentry,updatelending,addlending,updaterepayments} = lendingSlice.actions;
+export const {setlendings,deleteentry,updatelending,addlending,update_Repayments} = lendingSlice.actions;
 
 export default lendingSlice.reducer

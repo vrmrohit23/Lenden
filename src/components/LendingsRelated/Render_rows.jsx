@@ -10,9 +10,9 @@ function Render_rows({data,Lender_Borrower,seteditdeatils,setviewstate,setdetail
       <div className='flex justify-between flex-wrap items-start'>
 
 
-      {data.map((lending) => {
+      {data.map((lending,index) => {
         totallending = totallending + lending.Amount;
-        return <Lendingsrows data={lending} seteditdetails={seteditdeatils} setviewstate={setviewstate} key={lending.$id}  setdetails={setdetails}/>
+        return <Lendingsrows data={lending} seteditdetails={seteditdeatils} setviewstate={setviewstate} key={lending.$id}  setdetails={setdetails} index={index}/>
       })}
       </div>
       </div>
