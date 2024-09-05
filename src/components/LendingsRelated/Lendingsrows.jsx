@@ -7,7 +7,7 @@ import { updatelending } from '../../contexts/lendingsSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Repayments_rows from './Repayments_rows'
 
-function Lendingsrows({ data, seteditdetails, setviewstate, setdetails }) {
+function Lendingsrows({ data, seteditdetails, setviewstate, setdetails,index }) {
   const dispatch = useDispatch()
   const [expand, setexpand] = useState(false);
   const [expand_Repayment, setexpand_Repayment] = useState(false)
@@ -87,7 +87,7 @@ function Lendingsrows({ data, seteditdetails, setviewstate, setdetails }) {
           </div>
         </div>
         {expand_Repayment && 
-        <Repayments_rows repayments={data.Repayments}/>
+        <Repayments_rows repayments={data.Repayments} documentid = {data.$id} index = {index}/>
         } 
         {data.Purpose != '' && <>
           <span className='text-slate-400 block'>Note: </span>

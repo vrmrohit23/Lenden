@@ -30,6 +30,16 @@ import config from "../config";
             console.log("appwrite error" + error)
         }
     }
+
+    async updatedocument_Repayments(id,{Repayments}){
+        try {
+            
+            return await this.database.updateDocument(config.database,config.lendings,id,{
+                Repayments })   
+         } catch (error) {
+            console.log("appwrite error" + error)
+        }
+    }
     async updatedocument(id,{Status,Day,Month,Year,category,Desc,Amount,featuredimage,}){
         try {
             
