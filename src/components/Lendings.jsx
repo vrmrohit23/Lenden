@@ -35,7 +35,7 @@ function Lendings() {
         
       <Filter categoryoptions={filtercategory} filteroptions={filteroptions} month={month} setselectedfilters={setselectedfilters}/>
   
-        <Render_rows data={lendingslist} Lender_Borrower="Given to" setdetails={setdetails} seteditdeatils={seteditdeatils} setviewstate={setviewstate}/>
+        <Render_rows data={lendingslist} Lender_Borrower="Given to" setdetails={setdetails} seteditdeatils={seteditdeatils} setviewstate={setviewstate} showformat='list'/>
 
         <Lendingsform viewstate={viewstate} setviewstate={setviewstate} editdetails={editdetails} seteditdetails={seteditdeatils} />
 

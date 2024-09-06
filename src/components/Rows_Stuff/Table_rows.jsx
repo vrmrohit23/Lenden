@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { deleteentry } from '../../contexts/expenseslice'
 import { updateexpense } from '../../contexts/expenseslice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-function Expenserows({ expense, seteditdetails, setviewstate,setdetails}) {
+function Table_rows({ expense, seteditdetails, setviewstate,setdetails}) {
   const dispatch = useDispatch()
 
   // document status updation function
@@ -43,4 +43,4 @@ function Expenserows({ expense, seteditdetails, setviewstate,setdetails}) {
   )
 }
 
-export default Expenserows
+export default Table_rows

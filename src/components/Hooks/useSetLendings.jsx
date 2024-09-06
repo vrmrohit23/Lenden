@@ -86,7 +86,7 @@ function useSetExpenses() {
   setfiltered(filterlending)
 },[selectedfilters,month,lendingslist])
 
-
+console.log(filtered)
 lendingslist = filtered;
 
 lendingslist = lendingslist.filter((lending) => lending.Month === month && lending.Year === year)

@@ -15,14 +15,14 @@ function Repayments_rows({ repayments,id,index }) {
     const dispatch = useDispatch();
     const add_Repayments=async()=>{
         let date = formdata.Date.split("-").reverse().join("-");
-        let arraystring = [];
-        repayments.map((item)=>{
-            arraystring.push(JSON.stringify(item));
-        })
-        arraystring.push(JSON.stringify(formdata));
+        // let arraystring = [];
+        // repayments.map((item)=>{
+        //     arraystring.push(JSON.stringify(item));
+        // })
+        // arraystring.push(JSON.stringify(formdata));
         try{
-        let response = await documentobject.updatedocument_Repayments(id,arraystring)
-        if(response){
+        // let response = await documentobject.updatedocument_Repayments(id,arraystring)
+        if(true){
             formdata.Date = date
             let array = [...repayments,formdata]
             dispatch(update_Repayments({index:index,repayments:array}));
@@ -33,11 +33,10 @@ function Repayments_rows({ repayments,id,index }) {
         }
     }
     return (
-        <div>
-            <table className='w-full text-slate-400  font-light border-2 mt-3 text-xs  max-h-20 overflow-auto '>
+        <div className='max-h-20 overflow-auto '>
+            <table className='w-full text-slate-400  font-light border-2 mt-3 text-xs  '>
                 <thead >
                     <tr>
-
                     <th className='font-normal '>Date</th>
                     <th className='font-normal'>Method</th>
                     <th className='font-normal'>Amount</th>

@@ -49,9 +49,10 @@ function Filter({ categoryoptions = [], filteroptions, month ,setselectedfilters
 
     return (
         <>
-            <div className='flex justify-center sm:px-40 '>
-                <button className='text-lg px-8 shadow-lg rounded-3xl mb-1 py-1 duration-200 font-bold bg- hover:text-white  hover:bg-teal-600 sm:text-xl' onClick={() => setdisplay(true)}>
+            <div className='flex justify-center mx-4 sm:mx-10 '>
+                <button className='  px-8 shadow-lg rounded-3xl mb-1 py-1 duration-200 font-bold bg- hover:text-white  hover:bg-teal-600 sm:text-xl' onClick={() => setdisplay(true)}>
                     <FontAwesomeIcon icon={"fa-solid fa-filter"}/>  Filters
+                    
                 </button>
             </div>
             <div className={'fixed  inset-0 justify-center w-full h-full items-center backdrop-blur-sm bg-black bg-opacity-60 z-50 ' + (display ? 'flex' : 'hidden')} >
