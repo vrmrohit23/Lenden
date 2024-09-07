@@ -47,14 +47,12 @@ function List_rows({ data, seteditdetails, setviewstate, setdetails, index, Repa
         </div>
         <div className='flex flex-col items-end'>
           <div className=''>
-            <span className={'  font-bold font-mono  mr-2 text-nowrap ' + (data.Repayments?.length > 0 ? 'line-through text-sm  sm:text-base' : 'text-green-600 ')}>
-              {data.Amount} {data.Repayments?.length > 0 ? '' : 'Rs'}
+            <span className={'text-sm  sm:text-base  font-bold font-mono  mr-2 text-nowrap ' + (data.Repayments?.length > 0 ? 'line-through ' : 'text-green-600 ')}>
+              {data.Amount}
             </span>
-            {data.Repayments?.length > 0 &&
-              <span className=' text-nowrap text-green-600 text-opacity-80 font-bold sm:text-lg'>
-                {data.Amount - 100} Rs
+              <span className={'font-mono text-nowrap  text-green-600 text-opacity-80 font-bold sm:text-lg ' + (data.Repayments?.length > 0 ? '':'hidden')}>
+                {data.Amount - 100} 
               </span>
-            }
           </div>
           <div>
             <span className={'text-xs  rounded-full px-1 text-white  font-semibold ' + (data.Method == 'Cash' || data.Payment_Method == 'Cash' ? colors[0] : colors[1])}>
