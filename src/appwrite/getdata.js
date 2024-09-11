@@ -95,6 +95,6 @@ import { useSelector } from "react-redux";
     }
 }
 
-const documentobject = new documentservice();
+const expense_object = new documentservice();
 
-export default documentobject
+export default expense_object

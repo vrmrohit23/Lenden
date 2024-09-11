@@ -1,25 +1,24 @@
 import React from 'react'
-
+import New_List_rows from './newList_rows';
 import List_rows from './List_rows';
 import Table_rows from './Table_rows';
-function Render_rows({data,Lender_Borrower,seteditdeatils,setviewstate,setdetails,showformat = ''}) {
+function Render_rows({ data, Lender_Borrower, seteditdeatils, setviewstate, setdetails, showformat = '' }) {
   let total = 0;
-  let colors = ["bg-gray-800","bg-orange-600","bg-blue-600","bg-"]
-  return (showformat == 'list')? (
-    <section className={'px-3 py-10 mx-2 mb-20  bg-gradient-to-r from-gray-800 to to-gray-600 rounded-lg lg:px-20 lg:mx-20 max-h-96 overflow-auto sm:mx-10 sm:px-10'}>
-      <div className='fle'>
-
+  let colors = ["bg-gray-800", "bg-orange-600", "bg-blue-600", "bg-"]
+  return (showformat == 'list') ?
+    <section className={'px-3 py-10 m mb-20  bg-gradient-to-r from-gray-800 to to-gray-600 rounded lg:px-20 lg:mx-20 max-h-96 overflow-auto sm sm:px-10 '}>
       <div className='flex justify-between flex-wrap items-start'>
-      {data.map((item,index) => {
-        total = total+ item.Amount;
-        return <List_rows data={item} seteditdetails={seteditdeatils} setviewstate={setviewstate} key={item.$id}  setdetails={setdetails} index={index} Repaymentsneeded = {Lender_Borrower}/>
-      })}
+        {/* For creating rows */}
+        {data.map((data, index) => {
+          total = total + data.Amount;
+          return <List_rows key={data.$id} data={data} seteditdetails={seteditdeatils} setviewstate={setviewstate} setdetails={setdetails} index={index} Repaymentsneeded ={Lender_Borrower} />
+        })}
       </div>
-      </div>
-      </section>
-  )
-  :
-  (
+    </section>
+   
+    : 
+    // <New_List_rows expenseslist={data} />
+  // (
     <section className=" py-10  mb-20  bg-gradient-to-r from-green-300 to to-blue-400 rounded-lg lg:px-20 lg:mx-20 max-h-96 overflow-auto sm:mx-10 sm:px-10">
     <table className=' rounded-lg w-full px-4 bg-transparent '>
       <thead className=''>
@@ -54,7 +53,8 @@ function Render_rows({data,Lender_Borrower,seteditdeatils,setviewstate,setdetail
       </tbody>
     </table> 
     </section>
-  ) 
+  // ) 
+
 }
 
 export default Render_rows

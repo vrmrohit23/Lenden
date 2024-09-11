@@ -8,19 +8,19 @@ function useSetExpenses() {
     let auth = useSelector((state)=>state.auth.userdata.$id)
     if(!loaded && auth != 'login' && auth != null ){
       let dispatch = useDispatch();
-      console.log(auth)
+     
       documentobject.listdocuments(auth)
       .then(response =>{
         let docu = response.documents;
+        
         docu.map((data,index)=>{
           let array = [];
           data.Repayments.map((item)=>{
-            console.log(typeof item)
             array.push(JSON.parse(item))
           })
           data.Repayments = array
         })
-        dispatch(setlendings(response.documents)); console.log(response.documents)})
+        dispatch(setlendings(docu)); console.log(response.documents)})
       .catch(error=>{console.log(error)});
     }
     let lendingslist = useSelector((state) => state.lending.lendingslist)

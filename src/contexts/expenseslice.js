@@ -11,13 +11,13 @@ export const expenseslice = createSlice({
         addexpense:(state,action)=>{
             state.expenseslist = [...state.expenseslist,{...action.payload}]
         },
-        deleteentry:(state,action)=>{
+        delete_expense:(state,action)=>{
             state.expenseslist = state.expenseslist.filter((option)=>action.payload !== option.$id)
         },
         setexpenses:(state,action)=>{
             state.expenseslist = action.payload 
         },
-        updateexpense:(state,action)=>{
+        update_expense:(state,action)=>{
             state.expenseslist = state.expenseslist.map((option)=>{
                 if(option.$id === action.payload.$id){ 
                    
@@ -30,6 +30,6 @@ export const expenseslice = createSlice({
     }
 })
 
-export const {setexpenses,deleteentry,updateexpense,addexpense} = expenseslice.actions;
+export const {setexpenses,delete_expense,update_expense,addexpense} = expenseslice.actions;
 
 export default expenseslice.reducer

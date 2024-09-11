@@ -1,18 +1,26 @@
+const { nextui } = require("@nextui-org/react");
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    
-      
-    // extend: {
-    //   backgroundImage:{
-    //     'hero-banner': "url('https://images.pexels.com/photos/316466/pexels-photo-316466.jpeg')"
-    //   }
-    // },
+    extend: {},
   },
-  plugins: [],
-}
-
+  darkMode: "class",
+  plugins: [
+    nextui({
+      themes: {
+        light: {
+          colors:{
+            background:'gray-800'
+          }
+        }
+      },
+      addCommonColors: true,
+    }
+    )],
+};

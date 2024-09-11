@@ -104,6 +104,6 @@ import config from "../config";
     }
 }
 
-const documentobject = new documentservice();
+const lending_object = new documentservice();
 
-export default documentobject
+export default lending_object

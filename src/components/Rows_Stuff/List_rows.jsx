@@ -1,46 +1,45 @@
 import React, { useState } from 'react'
 import Commonbutton from '../commonbutton/commonbutton'
-import documentobject from '../../appwrite/getdata'
+import expense_object from '../../appwrite/getdata'
+import lending_object from '../../appwrite/getlendingsdata'
 import { useDispatch } from 'react-redux'
-import { deleteentry } from '../../contexts/lendingsSlice'
-import { updatelending } from '../../contexts/lendingsSlice'
+import { delete_lending, update_lending } from '../../contexts/lendingsSlice'
+import { delete_expense, update_expense } from '../../contexts/expenseslice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Repayments_rows from './Repayments_rows'
 
-function List_rows({ data, seteditdetails, setviewstate, setdetails, index, Repaymentsneeded }) {
+function List_rows({ data, seteditdetails, setviewstate, setdetails, index = '', Repaymentsneeded = 'yes' }) {
   const dispatch = useDispatch()
   const [expand, setexpand] = useState(false);
   const [expand_Repayment, setexpand_Repayment] = useState(false)
-  console.log(data)
 
-  // document status updation function
-  // const Approve_Reject = async (action) => {
-  //   const response = await documentobject.updatedocument(expense.$id,{Status:action})
-  //   if(response){
-  //     const updatedocumentobj = {userid:expense.userid, $id: expense.$id,Day:expense.Day,Month:expense.Month,Year:expense.Year,category:expense.category,Desc:expense.Desc,Amount:expense.Amount,featuredimage:expense.featuredimage,Status:action
-  //     }
-  //     dispatch(updateexpense(updatedocumentobj))
-  //   }
-  // }
-  const deletelending = async () => {
-    // let deleteresponse = await documentobject.deletedocument(expense.$id)
-    // if (deleteresponse) {
-    dispatch(deleteentry(data.$id))
+  const delete_Item = async () => {
+    if (Repaymentsneeded != 'No') {
+      // let deleteresponse = await lending_object.deletedocument(expense.$id)
+      // if (deleteresponse) {
+      dispatch(delete_lending(data.$id));
+    }
+    else {
+      // let deleteresponse = await expense_object.deletedocument(expense.$id)
+      // if (deleteresponse) {
+      dispatch(delete_expense(data.$id))
+    }
     // }
   }
-  let colors = ["bg-green-500", "bg-blue-500","bg-orange-500","bg-gray-700"]
+  let total = 0;
+  let colors = ["bg-green-500", "bg-blue-500", "bg-orange-500", "bg-gray-700"]
   return (
 
-    <div className={'rounded-lg   border-x-4  px-2 py-1 shadow-lg mb-5 border-sky-600  bg-gray-300 bg-opacity-20 sm:px-5 sm:mx-5 '}>
+    <div key={data.$id} className={'rounded-lg   border-x-4  px-2 py-1 shadow-lg mb-5 border-sky-600  bg-gray-300 bg-opacity-20 sm:px-5 sm:mx-5 '}>
       <div className={'flex justify-between w-auto ' + (expand ? 'mb-1' : '')}>
         <div className='mr-6 sm:mr-10'>
-          <p className=' font-bold text-transparent  text-yellow-600   rounded-full font-serif  flex items-center  flex-wrap sm:text-lg'>
+          <span className={'font-normal text-sm text-slate-400 italic sm:text-base ' + (Repaymentsneeded != 'No' ? '' : 'hidden')}>
+            Borrower:&nbsp;
+          </span>
+          <span className=' font-bold text-transparent  text-yellow-600   rounded-full font-serif   sm:text-lg'>
 
-            <p className={'font-normal text-sm text-slate-400 italic sm:text-base ' + (Repaymentsneeded != 'No' ? '' : 'hidden')}>
-              Borrower:&nbsp;
-            </p>
-            {data.Borrower_or_Lender? data.Borrower_or_Lender: data.category}
-          </p>
+            {data.Borrower_or_Lender ? data.Borrower_or_Lender : data.category}
+          </span>
           <p className='text-sm italic font-semibold text-slate-400 sm:text-base '>
             {data.Day + "-" + data.Month + "-" + data.Year}
           </p>
@@ -50,13 +49,13 @@ function List_rows({ data, seteditdetails, setviewstate, setdetails, index, Repa
             <span className={'text-sm  sm:text-base  font-bold font-mono  mr-2 text-nowrap ' + (data.Repayments?.length > 0 ? 'line-through ' : 'text-green-600 ')}>
               {data.Amount}
             </span>
-              <span className={'font-mono text-nowrap  text-green-600 text-opacity-80 font-bold sm:text-lg ' + (data.Repayments?.length > 0 ? '':'hidden')}>
-                {data.Amount - 100} 
-              </span>
+            <span className={'font-mono text-nowrap  text-green-600 text-opacity-80 font-bold sm:text-lg ' + (data.Repayments?.length > 0 ? '' : 'hidden')}>
+              {data.Amount - 100}
+            </span>
           </div>
           <div>
             <span className={'text-xs  rounded-full px-1 text-white  font-semibold ' + (data.Method == 'Cash' || data.Payment_Method == 'Cash' ? colors[0] : colors[1])}>
-              {data.Method?data.Method : data.Payment_Method}
+              {data.Method ? data.Method : data.Payment_Method}
             </span>
           </div>
         </div>
@@ -76,22 +75,22 @@ function List_rows({ data, seteditdetails, setviewstate, setdetails, index, Repa
             </div>
           </div>
           <div className='flex justify-end space-x-4'>
-            <div title='Edit' className='   p-0 duration-200 text-center  hover:text-green-600  text-base cursor-pointer sm:text-xl ' onClick={() => { seteditdetails(expense); setviewstate(true) }}>
+            <div title='Edit' className='   p-0 duration-200 text-center  hover:text-green-600  text-base cursor-pointer sm:text-xl ' onClick={() => { seteditdetails(data); setviewstate(true) }}>
               <FontAwesomeIcon icon="fa-regular fa-pen-to-square" />
             </div>
-            <div title='delete' className='  bg-transparent  p-0 duration-200 text-center  hover:text-red-500  text-base cursor-pointer sm:text-xl' onClick={deletelending}>
+            <div title='delete' className='  bg-transparent  p-0 duration-200 text-center  hover:text-red-500  text-base cursor-pointer sm:text-xl' onClick={delete_Item}>
               <FontAwesomeIcon icon="fa-regular fa-trash-can" />
             </div>
           </div>
         </div>
         {expand_Repayment && Repaymentsneeded != 'No' &&
-          <Repayments_rows repayments={data.Repayments} documentid={data.$id} index={index} />
+          <Repayments_rows repayments={data.Repayments} documentid={data.$id} indexing={index} />
         }
         {(data.Purpose != '' || data.Desc != '') && <>
           <span className='text-sm text-slate-400 block sm:text-base'>Note: </span>
-          <textarea className='text-sm bg-gray-300  px-2  rounded-lg border-2 border-black mb-4 h-14 w-full overflow-auto sm:text-base'>{Repaymentsneeded != 'No' ? data.Purpose : data.Desc}</textarea>
+          <textarea readOnly className='text-sm bg-gray-300  px-2  rounded-lg border-2 border-black mb-4 h-14 w-full overflow-auto sm:text-base' value={Repaymentsneeded != 'No' ? data.Purpose : data.Desc} /> 
         </>}
-        <p className={'text-sm text-slate-400 mb-4 sm:text-base ' + (Repaymentsneeded != 'No'?'':'hidden')}>Return(Expected): <span className='text-green-600'>{data.Return}</span></p>
+        <p className={'text-sm text-slate-400 mb-4 sm:text-base ' + (Repaymentsneeded != 'No' ? '' : 'hidden')}>Return(Expected): <span className='text-green-600'>{data.Return}</span></p>
       </div>
       <div className='relative text-center font-bold  '>
 
@@ -102,8 +101,9 @@ function List_rows({ data, seteditdetails, setviewstate, setdetails, index, Repa
       </div>
 
     </div>
-
   )
+
+
 }
 
 export default List_rows
