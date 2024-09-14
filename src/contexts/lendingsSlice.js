@@ -28,12 +28,16 @@ export const lendingSlice = createSlice({
             })
         },
         update_Repayments:(state,action)=>{
-            const {index,repayment} = action.payload;
+            const {index,repayment,repayment_object,repaid} = action.payload;
             state.lendingslist[index].Repayments.push(repayment);
+            state.lendingslist[index].Repayments_Objects.push(repayment_object);
+            state.lendingslist[index].Repaid = repaid;
         },
         delete_Repayment:(state,action)=>{
-            const {index,innerindex} = action.payload
+            const {index,innerindex,repaid} = action.payload
             state.lendingslist[index].Repayments.splice(innerindex,1); 
+            state.lendingslist[index].Repayments_Objects.splice(innerindex,1); 
+            state.lendingslist[index].Repaid = repaid;
         }
         
     }

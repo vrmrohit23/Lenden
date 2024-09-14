@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import documentobject from '../../appwrite/getlendingsdata';
 import { useDispatch } from 'react-redux';
 import { update_Repayments, delete_Repayment } from '../../contexts/lendingsSlice';
-function Repayments_rows({ repayments, id, indexing }) {
+function Repayments_rows({ repayments,repayments_objects,repaid, documentid, indexing }) {
     const [repaymentform, setrepaymentform] = useState(false);
     const [formdata, setformdata] = useState({
         Date: '',
@@ -13,30 +13,36 @@ function Repayments_rows({ repayments, id, indexing }) {
     })
     const dispatch = useDispatch();
     const add_Repayment = async () => {
+        formdata.Amount = Number.parseInt(formdata.Amount)
+        if(repaid == null){
+            repaid = formdata.Amount;
+        }
+        else{
+            repaid += formdata.Amount;
+        }
         let date = formdata.Date.split("-").reverse().join("-");
-        // let arraystring = [];
-        // repayments.map((item)=>{
-        //     arraystring.push(JSON.stringify(item));
-        // })
-        // arraystring.push(JSON.stringify(formdata));
+        formdata.Date = date
+        let updated_Repayments = [...repayments,JSON.stringify(formdata)]
         try {
-            // let response = await documentobject.updatedocument_Repayments(id,arraystring)
-            if (true) {
-                formdata.Date = date
+            let response = await documentobject.updatedocument_Repayments(documentid,{Repayments:updated_Repayments,Repaid:repaid})
+            if (response) {
                 // let array = [...repayments,formdata]
-                dispatch(update_Repayments({ index: indexing, repayment: formdata }));
+                dispatch(update_Repayments({ index: indexing, repayment: JSON.stringify(formdata),repayment_object:formdata,repaid:repaid }));
             }
         }
         catch (error) {
             console.log(error)
         }
     }
-    const delete_local = async (currentindex) => {
-        let deletedArray = repayments.filter((_, index) => index !== currentindex)
+    const delete_local = async (currentindex,amount) => {
+        let updated_Repayments = repayments.filter((_,index) => index != currentindex)
+        console.log(updated_Repayments)
+        repaid = repaid - amount;
         try {
-            if (true) {
-                console.log(deletedArray)
-                dispatch(delete_Repayment({ index: indexing, deletedArray: deletedArray }))
+            let response = await documentobject.updatedocument_Repayments(documentid,{Repayments:updated_Repayments,Repaid:repaid})
+            if (response) {
+                
+                dispatch(delete_Repayment({ index: indexing, innerindex: currentindex,repaid:repaid }))
             }
         }
         catch (error) {
@@ -55,12 +61,12 @@ function Repayments_rows({ repayments, id, indexing }) {
                         </tr>
                     </thead>
                     <tbody className='bg-gray-900'>
-                        {repayments.map((data, currentindex) => {
+                        {repayments_objects.map((data, currentindex) => {
                             return <tr key={currentindex}>
                                 <td className='text-center max-w-10'>{data.Date}</td>
                                 <td className='text-center'>{data.Method}</td>
                                 <td className='text-center'>{data.Amount}</td>
-                                <td title='delete' className='  bg-transparent  p-0 duration-200 text-center  hover:text-red-500  text-base cursor-pointer ' onClick={() => delete_local(currentindex)}>
+                                <td title='delete' className='  bg-transparent  p-0 duration-200 text-center  hover:text-red-500  text-base cursor-pointer ' onClick={() => delete_local(currentindex,data.Amount)}>
                                     <FontAwesomeIcon icon="fa-solid fa-minus" /></td>
                             </tr>
                         })

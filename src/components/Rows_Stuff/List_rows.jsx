@@ -30,7 +30,7 @@ function List_rows({ data, seteditdetails, setviewstate, setdetails, index = '',
   let colors = ["bg-green-500", "bg-blue-500", "bg-orange-500", "bg-gray-700"]
   return (
 
-    <div key={data.$id} className={'rounded-lg   border-x-4  px-2 py-1 shadow-lg mb-5 border-sky-600  bg-gray-300 bg-opacity-20 sm:px-5 sm:mx-5 '}>
+    <div key={data.$id} className={'rounded-lg w-full  border-x-4  px-2 py-1 shadow-lg mb-5 border-sky-600  bg-gray-300 bg-opacity-20 sm:px-5 sm:mx-5 sm:w-auto'}>
       <div className={'flex justify-between w-auto ' + (expand ? 'mb-1' : '')}>
         <div className='mr-6 sm:mr-10'>
           <span className={'font-normal text-sm text-slate-400 italic sm:text-base ' + (Repaymentsneeded != 'No' ? '' : 'hidden')}>
@@ -46,11 +46,11 @@ function List_rows({ data, seteditdetails, setviewstate, setdetails, index = '',
         </div>
         <div className='flex flex-col items-end'>
           <div className=''>
-            <span className={'text-sm  sm:text-base  font-bold font-mono  mr-2 text-nowrap ' + (data.Repayments?.length > 0 ? 'line-through ' : 'text-green-600 ')}>
+            <span className={'  font-bold font-mono  mr-2 text-nowrap ' + (data.Repayments?.length > 0 ? 'line-through ' : 'text-green-600 ')}>
               {data.Amount}
             </span>
             <span className={'font-mono text-nowrap  text-green-600 text-opacity-80 font-bold sm:text-lg ' + (data.Repayments?.length > 0 ? '' : 'hidden')}>
-              {data.Amount - 100}
+              {data.Amount - data.Repaid}
             </span>
           </div>
           <div>
@@ -84,7 +84,7 @@ function List_rows({ data, seteditdetails, setviewstate, setdetails, index = '',
           </div>
         </div>
         {expand_Repayment && Repaymentsneeded != 'No' &&
-          <Repayments_rows repayments={data.Repayments} documentid={data.$id} indexing={index} />
+          <Repayments_rows repayments={data.Repayments} repayments_objects = {data.Repayments_Objects} repaid={data.Repaid} documentid={data.$id} indexing={index} />
         }
         {(data.Purpose != '' || data.Desc != '') && <>
           <span className='text-sm text-slate-400 block sm:text-base'>Note: </span>

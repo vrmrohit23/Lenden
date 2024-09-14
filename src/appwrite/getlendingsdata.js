@@ -12,11 +12,11 @@ import config from "../config";
         this.database = new Databases(this.client)
         this.bucket = new Storage(this.client);
     }
-    async createdocument (category,{Day,Month,Year,Purpose,Amount,userid,Method,Borrower}){
+    async createdocument (category,{Day,Month,Year,Purpose,Amount,userid,Method,Borrower,Return}){
         try {
             
             return await this.database.createDocument(config.database,config.lendings,ID.unique(),{
-                Day,Month,Year,Purpose,Amount,userid,Method,Borrower
+                Day,Month,Year,Purpose,Amount,userid,Method,Borrower,Return
             }
                 )
         } catch (error) {
@@ -31,20 +31,19 @@ import config from "../config";
         }
     }
 
-    async updatedocument_Repayments(id,{Repayments}){
+    async updatedocument_Repayments(id,{Repayments,Repaid}){
         try {
             
             return await this.database.updateDocument(config.database,config.lendings,id,{
-                Repayments })   
+                Repayments,Repaid })   
          } catch (error) {
             console.log("appwrite error" + error)
         }
     }
-    async updatedocument(id,{Status,Day,Month,Year,category,Desc,Amount,featuredimage,}){
+    async updatedocument(id,{Status,Day,Month,Year,category,Desc,Amount,featuredimage,Return}){
         try {
-            
             return await this.database.updateDocument(config.database,config.lendings,id,{
-                Day,Month,Year,Desc,category,featuredimage,Amount,Status })
+                Day,Month,Year,Desc,category,featuredimage,Amount,Return })
          } catch (error) {
             console.log("appwrite error" + error)
         }

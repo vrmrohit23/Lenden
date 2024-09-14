@@ -7,12 +7,25 @@ function Render_rows({ data, Lender_Borrower, seteditdeatils, setviewstate, setd
   let colors = ["bg-gray-800", "bg-orange-600", "bg-blue-600", "bg-"]
   return (showformat == 'list') ?
     <section className={'px-3 py-10 m mb-20  bg-gradient-to-r from-gray-800 to to-gray-600 rounded lg:px-20 lg:mx-20 max-h-96 overflow-auto sm sm:px-10 '}>
+      
       <div className='flex justify-between flex-wrap items-start'>
         {/* For creating rows */}
-        {data.map((data, index) => {
-          total = total + data.Amount;
-          return <List_rows key={data.$id} data={data} seteditdetails={seteditdeatils} setviewstate={setviewstate} setdetails={setdetails} index={index} Repaymentsneeded ={Lender_Borrower} />
+        {data.map((entry, index) => {
+          total = total + entry.Amount - entry?.Repaid;
+          return <List_rows key={entry.$id} data={entry} seteditdetails={seteditdeatils} setviewstate={setviewstate} setdetails={setdetails} index={index} Repaymentsneeded ={Lender_Borrower} />
         })}
+      </div>
+      <div className='flex justify-end mt-5'>
+
+      <div className='inline-block rounded-xl bg-gray-300 bg-opacity-20'>
+
+        <span className='text-slate-300 bg-opacity-80 font-semibold rounded-xl rounded-r-none  text- px-1 inline-block'>
+          Total : 
+        </span>
+          <span className='text-green-600  font-mono text-lg px-1 rounded-l-none rounded-xl font-bold '>
+            {total}
+            </span>
+      </div>
       </div>
     </section>
    

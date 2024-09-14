@@ -70,17 +70,11 @@ function Expenseform({
     else {
       const file = data.image[0] ? await expense_object.uploadfile(data.image[0]) : undefined;
 
-      const createresponse = await expense_object.createdocument({ ...data, featuredimage: file ? file.$id : undefined, userid: user.$id })
+      const createresponse = await expense_object.createdocument({ ...data, featuredimage: file ? file.$id : undefined, userid: user.$id ,Day: datevariables[2], Month: datevariables[1], Year: datevariables[0]})
       if (createresponse) {
         delete (data.image);
-        const createobject = { userid: user.$id, $id: createresponse.$id, ...data, featuredimage: file ? file.$id : undefined }
-
-        data.Amount = Number.parseInt(data.Amount);
-        let datevariables = data.Date.split("-")
-        delete (data.Date)
-
-        const createobject1 = { userid: user.$id, $id: ID.unique(), ...data, Amount: data.Amount, Day: datevariables[2], Month: datevariables[1], Year: datevariables[0] }
-        dispatch(addexpense(createobject1))
+        const createobject = { userid: user.$id, $id: createresponse.$id, ...data, Amount: data.Amount, Day: datevariables[2], Month: datevariables[1], Year: datevariables[0] }
+        dispatch(addexpense(createobject))
         // }
       }
     }
@@ -115,7 +109,7 @@ function Expenseform({
 
                   <Selectfield
                     label='Category'
-                    options={['Fuel', 'Food', 'Travel', 'Hotel', 'Other']}
+                    options={['Fuel', 'Food', 'Travel', 'Hotel','Bills/Recharge', 'Other']}
                     classname='w-full rounded-none text-center font-semibold  tracking-wide'
                     {...register('category', {
                       required: true,

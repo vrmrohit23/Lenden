@@ -12,13 +12,12 @@ function useSetExpenses() {
       documentobject.listdocuments(auth)
       .then(response =>{
         let docu = response.documents;
-        
-        docu.map((data,index)=>{
+        docu.map((data)=>{
           let array = [];
           data.Repayments.map((item)=>{
             array.push(JSON.parse(item))
           })
-          data.Repayments = array
+          data.Repayments_Objects = array
         })
         dispatch(setlendings(docu)); console.log(response.documents)})
       .catch(error=>{console.log(error)});
