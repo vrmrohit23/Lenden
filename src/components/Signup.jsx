@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { Input, Commonbutton, Logo,Input_Pass_field } from './index'
+import { Input, Commonbutton, Input_Pass_field } from './index'
 import authobject from '../appwrite/authenticate'
 import { login as locallogin } from '../contexts/authslice'
 import { useForm } from 'react-hook-form'
@@ -33,17 +33,7 @@ function Signup() {
   return (
     <div className='mx-2 flex items-center justify-center  my-20 sm:mx-20'>
       <div className='  bg-gray-100 rounded-xl p-3 border border-black/10 sm:p-10'>
-        {/* <div className='flex justify-center mb-4'>
-
-          <Link to='/admin' className='text-xl font-serif hover:underline text-center text-blue-600 underline'>
-            back to admin page
-          </Link>
-        </div> */}
-        {/* <div className='mb-2 flex justify-center'>
-          <span className='inline-block'>
-            <Logo />
-          </span>
-        </div> */}
+       
         <h2 className='text-bold text-2xl text-center mr-2'>Sign Up / Create Account</h2>
 
 

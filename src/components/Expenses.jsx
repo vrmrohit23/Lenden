@@ -1,7 +1,12 @@
+<<<<<<< Updated upstream
 import React, { useState,useEffect } from 'react'
 import { Expenseform, Selectfield, Expenserows, Modalbox,Filter } from './index'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+=======
+import React from 'react'
+import { Expenseform, Selectfield, Expenserows, Modalbox, RenderTabs,Filter, Render_rows } from './index'
+>>>>>>> Stashed changes
 import useFilters from './Hooks/useFilters'
 import useSetExpenses from './Hooks/useSetExpenses'
 function Expenses() {
@@ -14,12 +19,15 @@ function Expenses() {
     "Category":["Travel","Hotel","Fuel","Food","Other"],
     "P_Method":["Cash","Credit-Card","Debit-Card","Borrowings","Google Pay/Paytm"],
   }
+<<<<<<< Updated upstream
   // console.log(expenseslist)
  
   
   let totalexpense = 0;
 
 
+=======
+>>>>>>> Stashed changes
   return (
     <>
       <Modalbox show={details != ''} details={details} setshow={setdetails}/>

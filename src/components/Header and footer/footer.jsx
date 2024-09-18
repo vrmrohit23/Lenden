@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom'
-// import { Logo, Container } from '../index'
+
 
 function Footer() {
   return (

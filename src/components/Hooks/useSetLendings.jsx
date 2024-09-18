@@ -71,6 +71,7 @@ function useSetExpenses() {
     if(selectedfilters["P_Method"] !== undefined && selectedfilters["P_Method"].length > 0){
       console.log("checking Payment Method")
       let Pmethodfilter = []
+<<<<<<< Updated upstream
       selectedfilters["P_Method"].map((options)=>
         Pmethodfilter = [...Pmethodfilter,...filterlending.filter((item)=>item.Payment_Method === options)]
     )
@@ -85,6 +86,32 @@ function useSetExpenses() {
   
   setfiltered(filterlending)
 },[selectedfilters,month,lendingslist])
+=======
+      selectedfilters["Borrowers"].map((options) =>
+        Pmethodfilter = [...Pmethodfilter, ...filterlending.filter((item) => item.Borrower_or_Lenderr === options)]
+      )
+      filterlending = Pmethodfilter;
+    }
+    if (selectedfilters["Range"] !== undefined) {
+      filterlending = filterlending.filter((items) => items.Amount < selectedfilters["Range"])
+    }
+    setfiltered(filterlending)
+  }, [selectedfilters, month, lendingslist])
+
+  console.log(filtered)
+  lendingslist = filtered;
+
+  lendingslist = lendingslist.filter((lending) => lending.Month === month && lending.Year === year)
+
+  const borrowerslist = useMemo(() => {
+    return lendingslist.reduce((acc, item) => {
+      if (!acc.some(borrower => borrower === item.Borrower_or_Lender)) {
+        acc.push(item.Borrower_or_Lender);
+      }
+      return acc;
+    }, []);
+  }, [lendingslist]);
+>>>>>>> Stashed changes
 
 
 lendingslist = filtered;

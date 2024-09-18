@@ -8,20 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function Expenserows({ expense, seteditdetails, setviewstate,setdetails}) {
   const dispatch = useDispatch()
 
-  // document status updation function
-  // const Approve_Reject = async (action) => {
-  //   const response = await documentobject.updatedocument(expense.$id,{Status:action})
-  //   if(response){
-  //     const updatedocumentobj = {userid:expense.userid, $id: expense.$id,Day:expense.Day,Month:expense.Month,Year:expense.Year,category:expense.category,Desc:expense.Desc,Amount:expense.Amount,featuredimage:expense.featuredimage,Status:action
-  //     }
-  //     dispatch(updateexpense(updatedocumentobj))
-  //   }
-  // }
   const deleteexpense = async () => {
-    // let deleteresponse = await documentobject.deletedocument(expense.$id)
-    // if (deleteresponse) {
       dispatch(deleteentry(expense.$id))
-    // }
   }
   return (
     <tr >

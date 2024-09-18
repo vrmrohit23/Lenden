@@ -1,12 +1,20 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+<<<<<<< Updated upstream
 import { Input, Commonbutton, Logo,Input_Pass_field } from './index'
 import  authobject from '../appwrite/authenticate'
 import { login as locallogin } from '../contexts/authslice'
 import { useForm } from 'react-hook-form'
 import documentobject from '../appwrite/getdata'
 import { setexpenses } from '../contexts/expenseslice'
+=======
+import { Input, Commonbutton, Input_Pass_field } from './index'
+import authobject from '../appwrite/authenticate'
+import { login as locallogin } from '../contexts/authslice'
+import { useForm } from 'react-hook-form'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+>>>>>>> Stashed changes
 
 function Login() {
   const dispatch = useDispatch()
@@ -42,13 +50,7 @@ function Login() {
   return (
     <div className='flex items-center justify-center w-full my-20 '>
       <div className=' bg-gray-100 rounded-xl p-3 border border-black/10 sm:p-10 mx-2'>
-        {/* <div className='mb-2 flex items-center flex-col'>
-          <span className='inline-block'>
-
-            <Logo />
-          </span>
-       
-        </div> */}
+      
         <h2 className='text-bold text-2xl text-center mr-2'>Sign in to your account</h2>
         
         {error && <p className='text-red-600 text-center mt-3'>{error}</p>}
@@ -79,6 +81,7 @@ function Login() {
               }
             })}
             />
+<<<<<<< Updated upstream
             {/* <Input 
             label='Password: '
             placeholder='Enter Password'
@@ -97,6 +100,8 @@ function Login() {
             
             
 
+=======
+>>>>>>> Stashed changes
             {errors.password && <p className='text-red-700 font-semibold '>{errors.password.message}</p>}
           </div>
           <Commonbutton 
