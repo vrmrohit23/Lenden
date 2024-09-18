@@ -1,18 +1,11 @@
-<<<<<<< HEAD
+
 import React, { useEffect, useState } from 'react'
 import { Input, Selectfield, Commonbutton} from '../index'
-=======
-import React, { useEffect, useState, useId } from 'react'
-import { Input, Selectfield, Commonbutton, Expenses } from '../index'
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
+
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { update_expense, addexpense } from '../../contexts/expenseslice'
 import expense_object from '../../appwrite/getdata'
-<<<<<<< HEAD
-=======
-import { monthsnames } from '../essentials/currentDMY_Exp'
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
 import { ID } from 'appwrite'
 function Expenseform({
   viewstate,

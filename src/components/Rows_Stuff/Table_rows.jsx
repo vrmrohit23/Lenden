@@ -9,7 +9,7 @@ function Table_rows({ expense, seteditdetails, setviewstate,setdetails}) {
   const dispatch = useDispatch()
 
   const deleteexpense = async () => {
-      dispatch(deleteentry(expense.$id))
+      dispatch(delete_expense(expense.$id))
   }
   return (
     <tr >

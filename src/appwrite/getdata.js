@@ -1,6 +1,5 @@
 import { Client,Databases, Query,Storage,ID} from "appwrite";
 import config from "../config";
-import { useSelector } from "react-redux";
 
  class documentservice{
     client = new Client();
@@ -73,14 +72,7 @@ import { useSelector } from "react-redux";
             console.log("appwrite error " + error)
         }
     }
-    // for admin files
-    async admindocuments(){
-        try {
-            return await this.database.listDocuments(config.database,config.Admin)
-        } catch (error) {
-            console.log("appwrite error " + error)
-        }
-    }
+ 
     //creating methods to upload and delete data
     async uploadfile(file){
         try {

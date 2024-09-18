@@ -81,41 +81,16 @@ function useSetLendings() {
       filterlending = Categoryfilter;
     }
     if (selectedfilters["Borrowers"] !== undefined && selectedfilters["Borrowers"].length > 0) {
-      let Pmethodfilter = []
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-      selectedfilters["P_Method"].map((options)=>
-        Pmethodfilter = [...Pmethodfilter,...filterlending.filter((item)=>item.Payment_Method === options)]
-    )
-    filterlending = Pmethodfilter;
-  }
-  if(selectedfilters["Range"] !== undefined){
-    filterlending = filterlending.filter((items) => items.Amount < selectedfilters["Range"] )
-  }
-  if(selectedfilters["Date"] !== undefined){
-    filterlending = filterlending.filter((items) => items.Day === selectedfilters["Date"] )
-  }
-  
-  setfiltered(filterlending)
-},[selectedfilters,month,lendingslist])
-=======
-=======
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
+      let borrowersfilter = []
       selectedfilters["Borrowers"].map((options) =>
-        Pmethodfilter = [...Pmethodfilter, ...filterlending.filter((item) => item.Borrower_or_Lenderr === options)]
+        borrowersfilter = [...borrowersfilter, ...filterlending.filter((item) => item.Borrower_or_Lender === options)]
       )
-      filterlending = Pmethodfilter;
+      filterlending = borrowersfilter;
     }
     if (selectedfilters["Range"] !== undefined) {
       filterlending = filterlending.filter((items) => items.Amount < selectedfilters["Range"])
     }
-<<<<<<< HEAD
-=======
-    // if(selectedfilters["Date"] !== undefined){
-    //   filterlending = filterlending.filter((items) => items.Day === selectedfilters["Date"] )
-    // }
 
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
     setfiltered(filterlending)
   }, [selectedfilters, month, lendingslist])
 
@@ -132,10 +107,7 @@ function useSetLendings() {
       return acc;
     }, []);
   }, [lendingslist]);
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
+
 
 
   return { lendingslist, setselectedfilters, months, month, setmonth, year, setyear, years, borrowerslist }

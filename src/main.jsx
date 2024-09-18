@@ -4,15 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { NextUIProvider } from '@nextui-org/react'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-import { Home, Contact, Login, Signup, Expenses,Admin,Lendings } from './components/index.js'
-=======
 import { Home, Contact, Login, Signup, Expenses, Lendings } from './components/index.js'
->>>>>>> Stashed changes
-=======
-import { Home, Contact, Login, Signup, Expenses, Lendings,Video_Guide } from './components/index.js'
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
 import { Provider } from 'react-redux'
 import store from './contexts/store.js'
 import Protected from './components/protected/Protected.jsx'

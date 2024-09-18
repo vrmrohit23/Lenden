@@ -1,8 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD
-=======
-import New_List_rows from './newList_rows';
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
 import List_rows from './List_rows';
 import Table_rows from './Table_rows';
 function Render_rows({ data, Lender_Borrower, seteditdeatils, setviewstate, setdetails, showformat = '' }) {
@@ -33,12 +29,7 @@ function Render_rows({ data, Lender_Borrower, seteditdeatils, setviewstate, setd
     </section>
    
     : 
-<<<<<<< HEAD
-  
-=======
-    // <New_List_rows expenseslist={data} />
-  // (
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
+
     <section className=" py-10  mb-20  bg-gradient-to-r from-green-300 to to-blue-400 rounded-lg lg:px-20 lg:mx-20 max-h-96 overflow-auto sm:mx-10 sm:px-10">
     <table className=' rounded-lg w-full px-4 bg-transparent '>
       <thead className=''>
@@ -73,11 +64,7 @@ function Render_rows({ data, Lender_Borrower, seteditdeatils, setviewstate, setd
       </tbody>
     </table> 
     </section>
-<<<<<<< HEAD
- 
-=======
-  // ) 
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
+
 
 }
 

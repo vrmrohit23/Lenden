@@ -80,37 +80,6 @@ import config from "../config";
             throw new Error(error)
         }
     }
-    // for admin files
-    // async admindocuments(){
-    //     try {
-    //         return await this.database.listDocuments(config.database,config.Admin)
-    //     } catch (error) {
-    //         console.log("appwrite error " + error)
-    //     }
-    // }
-    //creating methods to upload and delete data
-    async uploadfile(file){
-        try {
-            return await this.bucket.createFile(config.bucketid,ID.unique(),file)
-        } catch (error) {
-            console.log("appwrite error" + error)
-            return false;
-        }
-    }
-    async deletefile(id){
-        try {
-            return await this.bucket.deleteFile(config.bucketid,id)
-        } catch (error) {
-            console.log("appwrite error" + error)
-            return false;
-        }
-    }
-    getfilepreview(id){
-        return this.bucket.getFilePreview(config.bucketid,id)
-    }
-    getfileview(id){
-    return this.bucket.getFileView(config.bucketid,id)
-    }
 }
 
 const lending_object = new documentservice();

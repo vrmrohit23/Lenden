@@ -1,29 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-import { Input, Commonbutton, Logo,Input_Pass_field } from './index'
-import  authobject from '../appwrite/authenticate'
-=======
-import { Input, Commonbutton, Logo, Input_Pass_field } from './index'
-import authobject from '../appwrite/authenticate'
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
-import { login as locallogin } from '../contexts/authslice'
-import { useForm } from 'react-hook-form'
-import documentobject from '../appwrite/getdata'
-import { setexpenses } from '../contexts/expenseslice'
-<<<<<<< HEAD
-=======
 import { Input, Commonbutton, Input_Pass_field } from './index'
-import authobject from '../appwrite/authenticate'
+import  authobject from '../appwrite/authenticate'
 import { login as locallogin } from '../contexts/authslice'
 import { useForm } from 'react-hook-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
->>>>>>> Stashed changes
-=======
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
+
 
 function Login() {
   const dispatch = useDispatch()
@@ -96,27 +79,7 @@ function Login() {
                 }
               })}
             />
-<<<<<<< Updated upstream
-            {/* <Input 
-            label='Password: '
-            placeholder='Enter Password'
-            type = {showpassword?'text':'password'}
-            classname = 'inline-block w-full !mb-1 '
-            {...register('password',{
-              required:'field cannot be empty',
-              minLength: {
-                value: 8,
-                message: 'Password must have at least 8 characters'
-              }
-            })}
-            /> */}
-            {/** This div is for making the eye button in the password field to reveal and unreveal the password */}
 
-
-
-
-=======
->>>>>>> Stashed changes
             {errors.password && <p className='text-red-700 font-semibold '>{errors.password.message}</p>}
           </div>
           <Commonbutton

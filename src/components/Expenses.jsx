@@ -1,20 +1,10 @@
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-import React, { useState,useEffect } from 'react'
-import { Expenseform, Selectfield, Expenserows, Modalbox,Filter } from './index'
-=======
-import React, { useState, useEffect } from 'react'
-import { Expenseform, Selectfield, Expenserows, Modalbox, RenderTabs,Filter, Render_rows } from './index'
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-=======
+
 import React from 'react'
-import { Expenseform, Selectfield, Expenserows, Modalbox, RenderTabs,Filter, Render_rows } from './index'
->>>>>>> Stashed changes
+import { Expenseform, Selectfield,  Modalbox, RenderTabs,Filter, Render_rows } from './index'
+
+
 import useFilters from './Hooks/useFilters'
 import useSetExpenses from './Hooks/useSetExpenses'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function Expenses() {
   const { expenseslist, setselectedfilters, months, month, setmonth, year, setyear, years } = useSetExpenses();
   const { details, setdetails, viewstate, setviewstate, editdetails, seteditdeatils, showformat, setshowformat } = useFilters();
@@ -25,21 +15,13 @@ function Expenses() {
     "Category": ["Travel", "Hotel", "Fuel", "Food", "Other"],
     "P_Method": ["Cash", "Credit-Card", "Debit-Card", "Borrowings", "Google Pay/Paytm"],
   }
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  // console.log(expenseslist)
  
-  
-=======
-  console.log(expenseslist)
 
 
->>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
-  let totalexpense = 0;
 
 
-=======
->>>>>>> Stashed changes
+
+
   return (
     <>
       <div className=''>

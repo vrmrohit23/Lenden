@@ -1,7 +1,5 @@
 import React, { useState,useEffect,useMemo } from 'react'
 import { Lendingsform, Selectfield, Render_rows, Modalbox,Filter } from './index'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import useFilters from './Hooks/useFilters'
 import useSetLendings from './Hooks/useSetLendings'
 function Lendings() {
