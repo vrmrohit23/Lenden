@@ -20,6 +20,7 @@ import Lendingsform from "./forms/lendingsform";
 import Modalbox from "./essentials/Modalbox";
 import Filter from "./essentials/Filter";
 import RenderTabs from "./Rows_Stuff/Render_Tabs";
+import Video_Guide from "./Video&Guide";
 export {
-    Input,Commonbutton,Logo,Header,Footer,Signup,Login,Home,Contact,Selectfield,Expenses,Expenseform,Expenserows,Admin,Input_Pass_field,Modalbox,Filter,Lendings,Render_rows,Lendingsform,RenderTabs
+    Input,Commonbutton,Logo,Header,Footer,Signup,Login,Home,Contact,Selectfield,Expenses,Expenseform,Expenserows,Admin,Input_Pass_field,Modalbox,Filter,Lendings,Render_rows,Lendingsform,RenderTabs,Video_Guide
 }

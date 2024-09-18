@@ -11,7 +11,7 @@ function Render_rows({ data, Lender_Borrower, seteditdeatils, setviewstate, setd
       <div className='flex justify-between flex-wrap items-start'>
         {/* For creating rows */}
         {data.map((entry, index) => {
-          total = total + entry.Amount - entry?.Repaid;
+          total = total + entry.Amount - (entry.Repaid?entry.Repaid:0);
           return <List_rows key={entry.$id} data={entry} seteditdetails={seteditdeatils} setviewstate={setviewstate} setdetails={setdetails} index={index} Repaymentsneeded ={Lender_Borrower} />
         })}
       </div>

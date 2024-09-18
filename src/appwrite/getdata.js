@@ -13,11 +13,11 @@ import { useSelector } from "react-redux";
         this.database = new Databases(this.client)
         this.bucket = new Storage(this.client);
     }
-    async createdocument ({Day,Month,Year,category,Desc,Amount,featuredimage,userid,Payment_Method}){
+    async createdocument ({Day,Month,Year,category,Desc,Amount,featuredimage,userid,Method}){
         try {
             console.log(typeof Amount);
             return await this.database.createDocument(config.database,config.expenses,ID.unique(),{
-                Day,Month,Year,category,Desc,Amount,featuredimage,userid,Payment_Method
+                Day,Month,Year,category,Desc,Amount,featuredimage,userid,Method
             }
                 )
         } catch (error) {
@@ -31,13 +31,13 @@ import { useSelector } from "react-redux";
             console.log("appwrite error" + error)
         }
     }
-    async updatedocument(id,{Status,Day,Month,Year,category,Desc,Amount,featuredimage,}){
+    async updatedocument(id,{Day,Month,Year,category,Desc,Amount,featuredimage,Method}){
         try {
             
             return await this.database.updateDocument(config.database,config.expenses,id,{
-                Day,Month,Year,Desc,category,featuredimage,Amount,Status })
+                Day,Month,Year,Desc,category,featuredimage,Amount,Method })
          } catch (error) {
-            console.log("appwrite error" + error)
+            console.log("appwrite error " + error)
         }
     }
     async deletedocument(id){
@@ -47,6 +47,17 @@ import { useSelector } from "react-redux";
             )
         } catch (error) {
             console.log("appwrite error" + error)
+        }
+    }
+    async getGuestdocuments(){
+        try{
+            return await this.database.listDocuments(
+                config.database,config.Guest,
+                [Query.equal("type",['Expenses'])]
+            )
+        }
+        catch (error) {
+            console.log("appwrite error " + error)
         }
     }
     async listdocuments(userid){

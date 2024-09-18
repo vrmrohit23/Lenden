@@ -6,8 +6,8 @@ function RenderTabs({setformat}) {
   return (
 
     <div className="flex flex-col items-center ">
-      <Tabs aria-label="Options" onSelectionChange={setformat} color='primary'>
-        <Tab key="list" title={
+      <Tabs aria-label="Options" onSelectionChange={setformat} color='primary'  >
+        <Tab key="list"  title={
           <div className='space-x-2'>
             <FontAwesomeIcon icon="fa-solid fa-list-ul" />
             <span>List</span>

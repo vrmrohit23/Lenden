@@ -11,48 +11,62 @@ function Lendingsform({
   viewstate,
   setviewstate,
   editdetails,
-  seteditdetails
+  seteditdetails,
+  setMonth,
+  setYear
 }) {
   const dispatch = useDispatch();
   const user = useSelector(State => State.auth.userdata)
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   // const [monthlocal,setmonthlocal] = useState(thismonth);
 
-    const setvalues = ()=>{
-      setValue('Date', editdetails?editdetails.Year+'-'+editdetails.Month+'-'+editdetails.Day:'')
-      setValue('Purpose', editdetails?.Purpose || "")
-      setValue('Borrower_or_Lender', editdetails?.Borrower_or_Lender || "")
-      setValue('Return', editdetails?.Return || "")
-      setValue('Method', editdetails?.Method || "Cash")
-      setValue('Amount', editdetails?.Amount || "")
-    }
-    useEffect(() => {
-      setvalues();
+  const setvalues = () => {
+    setValue('Date', editdetails ? editdetails.Year + '-' + editdetails.Month + '-' + editdetails.Day : '')
+    setValue('Desc', editdetails?.Desc || "")
+    setValue('Borrower_or_Lender', editdetails?.Borrower_or_Lender || "")
+    setValue('Return', editdetails?.Return || "")
+    setValue('Method', editdetails?.Method || "Cash")
+    setValue('Amount', editdetails?.Amount || "")
+  }
+  useEffect(() => {
+    setvalues();
 
-    }, [editdetails])
+  }, [editdetails])
   // form submission function
   const formsubmit = async (data) => {
     setviewstate(false);
-        data.category = 'Lending'
-        data.Amount = Number.parseInt(data.Amount);
-        let datevariables = data.Date.split("-")
-        delete (data.Date)
+    data.category = 'Lending'
+    data.Amount = Number.parseInt(data.Amount);
+    const [year,month,day] = data.Date.split("-")
+    delete (data.Date)
     if (editdetails) {
-      const updatepostresponse = await lending_object.updatedocument(editdetails.$id, {...data, Day: datevariables[2], Month: datevariables[1], Year: datevariables[0]})
+      if (user.$id === "Guest") {
+        const updateobject = { userid: editdetails.userid, $id: editdetails.$id, ...data, Day:day, Month: month, Year: year, Repayments: editdetails.Repayments, Repayments_Objects: editdetails.Repayments_Objects }
+        dispatch(update_lending(updateobject))
+      }
+      const updatepostresponse = await lending_object.updatedocument(editdetails.$id, { ...data, Day:day, Month: month, Year: year })
       if (updatepostresponse) {
-        delete (data.image);
-        const updateobject = { userid: editdetails.userid, $id: editdetails.$id, ...data, Day: datevariables[2], Month: datevariables[1], Year: datevariables[0],Repayments:editdetails.Repayments,Repayments_Objects:editdetails.Repayments_Objects }
+
+        const updateobject = { userid: editdetails.userid, $id: editdetails.$id, ...data,Day:day, Month: month, Year: year, Repayments: editdetails.Repayments, Repayments_Objects: editdetails.Repayments_Objects }
         dispatch(update_lending(updateobject))
       }
       seteditdetails(null)
     }
     else {
-    const createresponse = await lending_object.createdocument({ ...data,userid:user.$id, Day: datevariables[2], Month: datevariables[1], Year: datevariables[0] })
-    if (createresponse) {
-    const createobject = {userid:user.$id, $id: createresponse.$id, ...data }
-    const createobject1 = { userid: user.$id, $id: ID.unique(), ...data, Amount: data.Amount, Day: datevariables[2], Month: datevariables[1], Year: datevariables[0], Repayments: [],Repayments_Objects:[] }
-    dispatch(addlending(createobject1))
-    }
+      if (user.$id === "Guest") {
+        const createobject = { userid: user.$id, $id: createresponse.$id, ...data, Amount: data.Amount,Day:day, Month: month, Year: year, Repayments: [], Repayments_Objects: [] }
+        dispatch(addlending(createobject))
+      }
+      else {
+        const createresponse = await lending_object.createdocument({ ...data, userid: user.$id, Day:day, Month: month, Year: year })
+        if (createresponse) {
+          const createobject = { userid: user.$id, $id: createresponse.$id, ...data, Amount: data.Amount,Day:day, Month: month, Year: year, Repayments: [], Repayments_Objects: [] }
+          dispatch(addlending(createobject))
+        }
+      }
+      setMonth(month)
+      setYear(year)
+      setvalues();
     }
   }
 
@@ -82,10 +96,10 @@ function Lendingsform({
                     <Input classname=' rounded-none' type='date' label='Return (Expected)' labelclassname=' font-semibold ' placeholder='Enter Amount in rs ' {...register('Return', {
                       required: true,
                     })} />
-                    
+
                   </div>
-                  <label htmlFor="textarea" className='font-semibold '>Purpose</label>
-                  <textarea name="" id="textarea" className='border-2 w-full mt-2 pt-2 px-4 outline-none focus:border-blue-600' rows="3" placeholder='if you wanna add a note' {...register('Purpose', {
+                  <label htmlFor="textarea" className='font-semibold '>Description</label>
+                  <textarea name="" id="textarea" className='border-2 w-full mt-2 pt-2 px-4 outline-none focus:border-blue-600' rows="3" placeholder='if you wanna add a note' {...register('Desc', {
 
                   })}></textarea>
                   <Selectfield
@@ -109,12 +123,12 @@ function Lendingsform({
               <div className='flex justify-end mt-5 '>
                 <Commonbutton text={'Cancel'} onClick={() => {
                   setviewstate(false);
-                    if(editdetails)seteditdetails(null);
-                      else setvalues();
+                  if (editdetails) seteditdetails(null);
+                  else setvalues();
                 }} classname='bg-blue-500 mr-4  text-white hover:bg-blue-600 sm:!px-20' />
 
                 <Commonbutton text={
-                  editdetails ? 'Update' :'ADD'
+                  editdetails ? 'Update' : 'ADD'
                 } type='submit' classname='bg-blue-500 text-white hover:bg-blue-600 sm:!px-20' />
                 <button type='submit'></button>
               </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Commonbutton, Selectfield } from '../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import documentobject from '../../appwrite/getlendingsdata';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { update_Repayments, delete_Repayment } from '../../contexts/lendingsSlice';
 function Repayments_rows({ repayments,repayments_objects,repaid, documentid, indexing }) {
     const [repaymentform, setrepaymentform] = useState(false);
@@ -11,6 +11,7 @@ function Repayments_rows({ repayments,repayments_objects,repaid, documentid, ind
         Method: 'Cash',
         Amount: ''
     })
+    const user = useSelector(State => State.auth.userdata)
     const dispatch = useDispatch();
     const add_Repayment = async () => {
         formdata.Amount = Number.parseInt(formdata.Amount)
@@ -24,11 +25,16 @@ function Repayments_rows({ repayments,repayments_objects,repaid, documentid, ind
         formdata.Date = date
         let updated_Repayments = [...repayments,JSON.stringify(formdata)]
         try {
+            if(user.$id === "Guest"){
+                dispatch(update_Repayments({ index: indexing, repayment: JSON.stringify(formdata),repayment_object:formdata,repaid:repaid }));
+            }
+            else{
             let response = await documentobject.updatedocument_Repayments(documentid,{Repayments:updated_Repayments,Repaid:repaid})
             if (response) {
                 // let array = [...repayments,formdata]
                 dispatch(update_Repayments({ index: indexing, repayment: JSON.stringify(formdata),repayment_object:formdata,repaid:repaid }));
             }
+        }
         }
         catch (error) {
             console.log(error)
@@ -39,11 +45,16 @@ function Repayments_rows({ repayments,repayments_objects,repaid, documentid, ind
         console.log(updated_Repayments)
         repaid = repaid - amount;
         try {
+            if(user.$id === "Guest"){
+                dispatch(delete_Repayment({ index: indexing, innerindex: currentindex,repaid:repaid }))
+            }
+            else{
             let response = await documentobject.updatedocument_Repayments(documentid,{Repayments:updated_Repayments,Repaid:repaid})
             if (response) {
                 
                 dispatch(delete_Repayment({ index: indexing, innerindex: currentindex,repaid:repaid }))
             }
+        }
         }
         catch (error) {
             console.log(error)

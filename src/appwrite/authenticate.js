@@ -22,13 +22,9 @@ class authservice{
         }
     }
     async login({email,password}){
-        try {
-            // let resp
+        try {  
            let response =  await this.account.createEmailSession(email,password)
            if(response){
-            //    resp = response
-            //    console.log(response);
-              
                localStorage.setItem('token','login');   
                return response
            }

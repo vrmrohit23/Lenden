@@ -11,18 +11,18 @@ function Slideshow() {
             clearTimeout(timeoutid.current)
         }
     } 
-    // useEffect(()=>{
-    //     resettimeout();
-    //    timeoutid.current = setTimeout(()=>
-    //         setindex((prev)=>
-    //             prev === 2?0:prev+1
-    //         )
-    //      ,4000   
-    // )
-    // return ()=>{
-    //     resettimeout();
-    // }
-    // },[index])
+    useEffect(()=>{
+        resettimeout();
+       timeoutid.current = setTimeout(()=>
+            setindex((prev)=>
+                prev === 2?0:prev+1
+            )
+         ,4000   
+    )
+    return ()=>{
+        resettimeout();
+    }
+    },[index])
 
 
 

@@ -32,7 +32,7 @@ function Table_rows({ expense, seteditdetails, setviewstate,setdetails}) {
       </span></td>
       </Tooltip>
       <td className='border-2 max-h-7 bg-gray-200 border-gray-100 text-center max-w-10 text-xs sm:text-base'>{expense.category}</td>
-      <td className={`border-2 bg-gray-200 max-w-10 border-gray-100 text-center text-xs sm:text-base`}>{expense.Payment_Method}</td>
+      <td className={`border-2 bg-gray-200 max-w-10 border-gray-100 text-center text-xs sm:text-base`}>{expense.Method}</td>
       <td className='border-2 bg-gray-200 border-gray-100 text-center text-xs sm:text-base'>{expense.Amount}</td>
       <Tooltip content='Edit'>
 

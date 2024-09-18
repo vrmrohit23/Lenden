@@ -15,7 +15,7 @@ function Expenses() {
     "Category": ["Travel", "Hotel", "Fuel", "Food", "Other"],
     "P_Method": ["Cash", "Credit-Card", "Debit-Card", "Borrowings", "Google Pay/Paytm"],
   }
-  // console.log(expenseslist)
+  console.log(expenseslist)
 
 
   let totalexpense = 0;
@@ -40,7 +40,7 @@ function Expenses() {
         </div>
       
         <Render_rows data={expenseslist} Lender_Borrower="No" setdetails={setdetails} seteditdeatils={seteditdeatils} setviewstate={setviewstate} showformat={showformat} />
-        <Expenseform viewstate={viewstate} setviewstate={setviewstate} editdetails={editdetails} seteditdetails={seteditdeatils} />
+        <Expenseform viewstate={viewstate} setviewstate={setviewstate} editdetails={editdetails} seteditdetails={seteditdeatils} setMonth={setmonth} setYear={setyear} />
         <section>
           <div className='flex justify-center mb-20'>
             <button className='bg-gradient-to-r from-orange-500 to-yellow-500 px-2 py-1 text-base rounded-md hover:scale-110 duration-75 sm:text-xl' onClick={() => { if (!viewstate) { setviewstate(true) } }}>

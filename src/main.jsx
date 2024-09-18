@@ -2,12 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {NextUIProvider} from '@nextui-org/react'
+import { NextUIProvider } from '@nextui-org/react'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
-import { Home, Contact, Login, Signup, Expenses,Admin,Lendings } from './components/index.js'
+import { Home, Contact, Login, Signup, Expenses, Lendings,Video_Guide } from './components/index.js'
 import { Provider } from 'react-redux'
 import store from './contexts/store.js'
 import Protected from './components/protected/Protected.jsx'
+import ScrollToTop from './components/essentials/ScrolltoTop.jsx'
 
 
 const router = createBrowserRouter(
@@ -27,9 +28,12 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-    <NextUIProvider>
-      <RouterProvider router={router} />
-    </NextUIProvider>
+      <NextUIProvider>
+        <RouterProvider router={router} >
+          <ScrollToTop />
+
+        </RouterProvider>
+      </NextUIProvider>
     </Provider>
   </React.StrictMode>,
 )

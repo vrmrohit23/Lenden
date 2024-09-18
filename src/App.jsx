@@ -11,57 +11,50 @@ import documentobject from './appwrite/getdata';
 
 const App = () => {
   const [loading, setloading] = useState(true)
-  const userstatus = useSelector((state)=>state.auth.status)
+  const userstatus = useSelector((state) => state.auth.status)
   const dispatch = useDispatch()
-  const checklogin = ()=>{
+  const checklogin = () => {
     authobject.getacc().then((response) => {
       if (response) {
         dispatch(login(response))
-        console.log(response)
-        documentobject.listdocuments(response.$id)
-          .then((resolve) => {
-            if (resolve) {
-              dispatch(setexpenses(resolve.documents))
-              }})
-            }
-            else{
-              if(userstatus){
-              localStorage.removeItem('token');
-              dispatch(logout())
-              }
-            }
-          })
-          .catch((err) =>
-            console.log('Error occur : ', err)
-        )
-        .finally(()=>{
-            setloading(false)
-          })
-     
+      }
+      else {
+        if (userstatus) {
+          localStorage.removeItem('token');
+          dispatch(logout())
+        }
+      }
+    })
+      .catch((err) =>
+        console.log('Error occur : ', err)
+      )
+      .finally(() => {
+        setloading(false)
+      })
+
   }
   useEffect(() => {
-    try{
-    if(localStorage.getItem('token') != null){
-      setloading(false)
+    try {
       let token = localStorage.getItem('token')
-      console.log(token)
-      dispatch(login(token));
-      checklogin();
+      if (token != null) {
+        setloading(false)
+        dispatch(login(token));
+        checklogin();
+      }
+      else {
+        checklogin();
+      }
     }
-    else{
-      checklogin();
-    }
-  }
-    catch(err){
-      console.log('Error Occured : ',err)
+    catch (err) {
+      console.log('Error Occured : ', err)
       setloading(false)
     }
-  
 
 
 
-    
-    
+
+
+
   }, [])
   return loading ? (
     <div className='flex justify-center items-center h-screen flex-col'>

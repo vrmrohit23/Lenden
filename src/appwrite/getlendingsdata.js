@@ -12,13 +12,13 @@ import config from "../config";
         this.database = new Databases(this.client)
         this.bucket = new Storage(this.client);
     }
-    async createdocument (category,{Day,Month,Year,Purpose,Amount,userid,Method,Borrower,Return}){
+    async createdocument ({Day,Month,Year,Desc,Amount,userid,Method,Borrower_or_Lender,Return,category}){
         try {
             
             return await this.database.createDocument(config.database,config.lendings,ID.unique(),{
-                Day,Month,Year,Purpose,Amount,userid,Method,Borrower,Return
+                Day,Month,Year,Desc,Amount,userid,Method,Borrower_or_Lender,Return,category
             }
-                )
+            )
         } catch (error) {
             console.log('appwrite error' + error)
         }
@@ -40,7 +40,7 @@ import config from "../config";
             console.log("appwrite error" + error)
         }
     }
-    async updatedocument(id,{Status,Day,Month,Year,category,Desc,Amount,featuredimage,Return}){
+    async updatedocument(id,{Day,Month,Year,category,Desc,Amount,featuredimage,Return}){
         try {
             return await this.database.updateDocument(config.database,config.lendings,id,{
                 Day,Month,Year,Desc,category,featuredimage,Amount,Return })
@@ -51,19 +51,29 @@ import config from "../config";
     async deletedocument(id){
         try {
             return await this.database.deleteDocument(
-                config.database,config.expenses,id
+                config.database,config.lendings,id
             )
         } catch (error) {
             console.log("appwrite error" + error)
+        }
+    }
+    async getGuestdocuments(){
+        try{
+            return await this.database.listDocuments(
+                config.database,config.Guest,
+                [Query.equal("type",['Lendings'])]
+            )
+        }
+        catch (error) {
+            console.log("appwrite error " + error)
         }
     }
     async listdocuments(userid){
         try {
             console.log(userid)
             return await this.database.listDocuments(
-                config.database,config.lendings,[
-                Query.equal("userid",[userid])
-                ]
+                config.database,config.lendings,
+                [Query.equal("userid",[userid])]
             )
         } catch (error) {
             console.log("appwrite error " + error)

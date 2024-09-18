@@ -19,6 +19,10 @@ export const lendingSlice = createSlice({
             state.lendingslist = action.payload 
             state.loaded = true;
         },
+        reset_lendings:(state)=>{
+            state.lendingslist = [];
+            state.loaded = false;
+        },
         update_lending:(state,action)=>{
             state.lendingslist = state.lendingslist.map((option)=>{
                 if(option.$id === action.payload.$id){       
@@ -43,6 +47,6 @@ export const lendingSlice = createSlice({
     }
 })
 
-export const {setlendings,delete_lending,update_lending,addlending,update_Repayments,delete_Repayment} = lendingSlice.actions;
+export const {setlendings,delete_lending,update_lending,addlending,update_Repayments,delete_Repayment,reset_lendings} = lendingSlice.actions;
 
 export default lendingSlice.reducer
