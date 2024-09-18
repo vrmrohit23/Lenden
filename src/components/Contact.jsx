@@ -2,20 +2,17 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Input, Commonbutton, Selectfield } from './index'
 import { useForm } from 'react-hook-form'
 import queryobject from '../appwrite/Contact_pagequeries'
-import Updatebox, { submission } from './dialogbox/Dialogbox/updatebox'
+
 function Contact() {
   const [emailbutton, setemailbutton] = useState("copy")
   const { register, handleSubmit, formState: { errors }, setValue } = useForm()
-  const [updateboxmessage,setupdateboxmessage] = useState('update boxi')
   const emailclicked = async () => {
-    setupdateboxmessage('copied to clipboard')
-    
     try {
       const permissions = await navigator.permissions.query({ name: "clipboard-write" })
       if (permissions.state === "granted" || permissions.state === "prompt") {
         await navigator.clipboard.writeText('Lendenofficial01@gmail.com');
         setemailbutton('copied')
-        submission()
+       
       } else {
         throw new Error("Can't access the clipboard. Check your browser permissions.")
       }
@@ -69,7 +66,8 @@ function Contact() {
           </p>
         </div>
       </section>
-      <Updatebox text={updateboxmessage}/>
+   
+      
       <section id='emailandform' >
         <div className='px-3 flex  flex-col lg:flex-row lg:justify-between sm:px-20'>
           <div className='flex  items-start mb-20 flex-col'>

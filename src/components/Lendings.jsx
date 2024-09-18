@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useMemo } from 'react'
 import { Lendingsform, Selectfield, Render_rows, Modalbox,Filter } from './index'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -6,14 +6,16 @@ import useFilters from './Hooks/useFilters'
 import useSetLendings from './Hooks/useSetLendings'
 function Lendings() {
   
-  const {lendingslist,setselectedfilters,months,month,setmonth,year,setyear,years} = useSetLendings();
+  const {lendingslist,setselectedfilters,months,month,setmonth,year,setyear,years,borrowerslist} = useSetLendings();
   const {details,setdetails,viewstate,setviewstate,editdetails,seteditdeatils} = useFilters();
   const filtercategory = [
-    'Category','P_Method','Amount','Date'
+    'Method','Borrowers','Amount'
   ]
+  
+ 
   const filteroptions = {
-    "Category":["Travel","Hotel","Fuel","Food","Other"],
-    "P_Method":["Cash","Credit-Card","Debit-Card","Borrowings","Google Pay/Paytm"],
+    "Method":['Cash', 'Recharge/Bills', 'Paytm', 'Google Pay', 'Contribution'],
+    "Borrowers":borrowerslist
   }
   console.log(lendingslist)
 
@@ -35,9 +37,9 @@ function Lendings() {
         
       <Filter categoryoptions={filtercategory} filteroptions={filteroptions} month={month} setselectedfilters={setselectedfilters}/>
   
-        <Render_rows data={lendingslist} Lender_Borrower="Given to" setdetails={setdetails} seteditdeatils={seteditdeatils} setviewstate={setviewstate}/>
+        <Render_rows data={lendingslist} Lender_Borrower="Given to" setdetails={setdetails} seteditdeatils={seteditdeatils} setviewstate={setviewstate} showformat='list'/>
 
-        <Lendingsform viewstate={viewstate} setviewstate={setviewstate} editdetails={editdetails} seteditdetails={seteditdeatils} />
+        <Lendingsform viewstate={viewstate} setviewstate={setviewstate} editdetails={editdetails} seteditdetails={seteditdeatils} setMonth={setmonth} setYear={setyear}/>
 
         <section>
           <div className='flex justify-center mb-20'>

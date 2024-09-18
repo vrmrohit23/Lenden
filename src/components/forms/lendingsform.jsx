@@ -5,6 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { update_lending, addlending } from '../../contexts/lendingsSlice'
 import lending_object from '../../appwrite/getlendingsdata'
 
+<<<<<<< HEAD
+=======
+import { thisday, thismonth, thisyear } from '../essentials/currentDMY_Exp'
+
+>>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
 function Lendingsform({
   viewstate,
   setviewstate,
@@ -72,6 +77,14 @@ function Lendingsform({
     <>
       <section className={`${viewstate ? 'flex ' : 'hidden'}  fixed justify-center inset-0 items-center  w-full h-full z-50 bg-black bg-opacity-40`}>
         <div className={`text-xs  relative  mx-3 border-2 border-double  border-amber-500 max-h-screen w-full overflow-auto md:w-3/5 lg:w-2/5  sm:mx-5 sm:text-base`}>
+<<<<<<< HEAD
+=======
+
+
+          {/* <div className='bg-gradient-to-r  from-red-400 to-pink-300 px-2 py-2  sm:px-20 sm:py-5'>
+            <div className='text-center '><h1 className='bg-white text-xl font-semibold text-blue-500 border-2 border-blue-500 border-dashed shadow-lg px-4 py-2 sm:text-3xl'>Add a new expense or Edit existing one</h1></div>
+          </div> */}
+>>>>>>> 84232ce46d07d9bdbdb81ebe58ee396311f34592
           <form onSubmit={handleSubmit(formsubmit)}>
             <div className='bg-opacity-7 bg-gray-200 px-2 pt-4 pb-2 sm:px-10 sm:pb-5 sm:pt-10'>
               <div className=''>
