@@ -98,7 +98,7 @@ function Lendingsform({
                   })}></textarea>
                   <Selectfield
                     label='Method'
-                    options={['Cash', 'Recharge/Bills', 'Paytm', 'Google Pay', 'Contribution']}
+                    options={['Cash', 'Recharge/Bill', 'Paytm', 'Google Pay', 'Contribution']}
                     classname='w-full rounded-none text-center font-semibold  tracking-wide'
                     {...register('Method', {
                       required: true,
