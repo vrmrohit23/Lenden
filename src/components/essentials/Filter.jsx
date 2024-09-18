@@ -1,24 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 
-function Filter({ categoryoptions = [], filteroptions, month ,setselectedfilters}) {
-
+function Filter({ categoryoptions, filteroptions,setselectedfilters}) {
     const [selectedcategory, setselectedcategory] = useState(categoryoptions[0]);
+    
+    
     const [selectedoptions, setselectedoptions] = useState({
-        'Category': [],
-        'P_Method': []
+        [categoryoptions[0]]:[],
+        [categoryoptions[1]]:[]
     });
     const [display, setdisplay] = useState(false);
     const [rangevalue, setrangevalue] = useState(0);
     const [selecteddate, setselecteddate] = useState(null);
-    let montharray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28'];
-    if (month !== "Feb") {
-
-        montharray.push('29', '30')
-        if (month !== "Apr" && month !== "Jun" && month !== "Sep" && month !== "Nov") {
-            montharray.push('31')
-        }
-    }
+    let montharray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28','29','30','31'];
+  
     // to handle the apply button of filter
     const handle_Apply = () => {
         let newfilterobject = { ...selectedoptions };
@@ -49,9 +44,10 @@ function Filter({ categoryoptions = [], filteroptions, month ,setselectedfilters
 
     return (
         <>
-            <div className='flex justify-center sm:px-40 '>
-                <button className='text-lg px-8 shadow-lg rounded-3xl mb-1 py-1 duration-200 font-bold bg- hover:text-white  hover:bg-teal-600 sm:text-xl' onClick={() => setdisplay(true)}>
+            <div className='flex justify-center mx-4 sm:mx-10 '>
+                <button className='  px-8 shadow-lg rounded-3xl mb-1 py-1 duration-200 font-bold bg- hover:text-white  hover:bg-teal-600 sm:text-xl' onClick={() => setdisplay(true)}>
                     <FontAwesomeIcon icon={"fa-solid fa-filter"}/>  Filters
+                    
                 </button>
             </div>
             <div className={'fixed  inset-0 justify-center w-full h-full items-center backdrop-blur-sm bg-black bg-opacity-60 z-50 ' + (display ? 'flex' : 'hidden')} >
@@ -75,13 +71,12 @@ function Filter({ categoryoptions = [], filteroptions, month ,setselectedfilters
                             {filteroptions[selectedcategory] &&
                                 filteroptions[selectedcategory].map((members) =>
                                     <label htmlFor="" key={members} className='flex mb-2'>
-
                                         <input type="checkbox" name="" id="" className='mr-1 w-4 ' checked={selectedoptions[selectedcategory].includes(members)}
                                             onChange={() => { handleCheckboxChange(selectedcategory, members); }} />
                                         <h2 className=''>{members}</h2>
                                     </label>
                                 )}
-                            {selectedcategory === 'Amount' &&
+                            { selectedcategory === 'Amount' &&
                                 <div className='w-full'>
                                     <input type="range" id='amountrange' value={rangevalue} className='w-full' onChange={(e) => setrangevalue(e.target.value)} max={100000} />
                                     <div className=' justify-between  sm:flex'>
@@ -95,6 +90,7 @@ function Filter({ categoryoptions = [], filteroptions, month ,setselectedfilters
                                     </button>
                                 </div>
                             }
+
                             {selectedcategory === 'Date' &&
                                 <div>
                                     <ul className='flex flex-wrap'>
@@ -120,8 +116,9 @@ function Filter({ categoryoptions = [], filteroptions, month ,setselectedfilters
                         <div className='flex justify-between'>
                             <button className='focus:outline-none  mr-3 px-2 py-1 font-semibold font-serif text-red-400 hover:bg-slate-800 hover:text-red-600 sm:text-xl duration-300 rounded-sm' onClick={() => {
                                 setselectedoptions({
-                                    'Category': [],
-                                    'P_Method': []
+                                    [categoryoptions[0]]: [],
+                                    [categoryoptions[1]]: [],
+                                    
                                 });
                                 setrangevalue(0);
                                 setselecteddate(null)

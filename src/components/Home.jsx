@@ -5,21 +5,8 @@ function Home() {
   
   return (
     <div>
-      {/*The main banner section here */}
-      {/* <div className="  pt-16 px-20 mx-4 bg-[url('https://images.pexels.com/photos/207456/pexels-photo-207456.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover bg-no-repeat  shadow-md mb-20 bg-center bg-opacity-30 flex flex-col items-center">
-
-        <div className='mb-8 '>
-          <p className='text-4xl bg-  text-orange-500  border-2 border-x-indigo-800 border-y-yellow-400 rounded-lg p-3'>We are Very Happy to Listen to You</p>
-        </div>
-        <div className='mb-16'>
-          <p className='text-4xl  text-orange-500  border-2 rounded-lg p-3 border-x-red-600 border-y-cyan-600 '>Got tired of remembering lendings?</p>
-        </div>
-        <div className='mb-16'>
-          <p className='text-6xl  text-indigo-500  font-semibold rounded-lg p-3  '>Lenden <i className='text-slate-500 font-normal'>is here for you</i></p>
-        </div> */}
-        
-        <Slideshow/>
-      
+      {/*The main banner section here */}   
+      <Slideshow/>
       {/*The quotes starts here section here */}
       <div className='flex-wrap  mx-5 py-10 border-2 border-lime-600 rounded-lg flex  justify-center mb-20  sm:mx-10 sm:px-10  lg:justify-between lg:px-20 lg:py-20 lg:mx-20 '>
         <div className=' px-2 py-3 font-medium font-serif text-xl bg-sky-100 rounded-md  mb-4 mx-5 sm:mx-4 transition-shadow duration-300 hover:shadow-lg  hover:shadow-gray-400 sm:text-2xl sm:px-8 sm:py-8 lg:mx-2  lg:mb-4'><p className='mb-3 text-center'>"Money is a tool. <br />Used propely it makes something beautiful;<br />

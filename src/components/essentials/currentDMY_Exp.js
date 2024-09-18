@@ -6,18 +6,18 @@ const date = new Date();
 const thisday = date.getDate() +'';
 const currentmonthno = date.getMonth();
 const monthsnames = {
-    0:"Jan",
-    1:"Feb",
-    2:"Mar",
-    3:"Apr",
-    4:"May",
-    5:"Jun",
-    6:"Jul",
-    7:"Aug",
-    8:"Sep",
-    9:"Oct",
-    10:"Nov",
-    11:"Dec"
+    "01":"Jan",
+    "02":"Feb",
+    "03":"Mar",
+    "04":"Apr",
+    "05":"May",
+    "06":"Jun",
+    "07":"Jul",
+    "08":"Aug",
+    "09":"Sep",
+    "10":"Oct",
+    "11":"Nov",
+    "12":"Dec"
 }
 const thismonth = monthsnames[currentmonthno];
 const thisyear = date.getFullYear() + '';
@@ -49,6 +49,6 @@ const thisyear = date.getFullYear() + '';
 // )
 //     }
 export {
-    thisday,thismonth,thisyear
+    thisday,thismonth,thisyear,monthsnames
 }
 // export default CurrentDMY_Exp;
