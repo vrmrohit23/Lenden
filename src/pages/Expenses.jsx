@@ -1,10 +1,10 @@
 
 import React from 'react'
-import { Expenseform, Selectfield,  Modalbox, RenderTabs,Filter, Render_rows } from './index'
+import { Expenseform, Selectfield,  Modalbox, RenderTabs,Filter, Render_rows } from '../components/index'
 
 
-import useFilters from './Hooks/useFilters'
-import useSetExpenses from './Hooks/useSetExpenses'
+import useFilters from '../components/Hooks/useFilters'
+import useSetExpenses from '../components/Hooks/useSetExpenses'
 function Expenses() {
   const { expenseslist, setselectedfilters, months, month, setmonth, year, setyear, years } = useSetExpenses();
   const { details, setdetails, viewstate, setviewstate, editdetails, seteditdeatils, showformat, setshowformat } = useFilters();

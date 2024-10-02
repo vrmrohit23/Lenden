@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { Input, Commonbutton, Input_Pass_field } from './index'
+import { Input, Commonbutton, Input_Pass_field } from '../components/index'
 import  authobject from '../appwrite/authenticate'
 import { login as locallogin } from '../contexts/authslice'
 import { useForm } from 'react-hook-form'
@@ -17,7 +17,7 @@ function Login() {
   const Guestlogin = async () => {
     seterror(null)
     try {
-      dispatch(locallogin({ $id: 'Guest' }))
+      dispatch(locallogin({ $id: 'Guest',name:'Guest' }))
       navigate('/')
     }
     catch (error) {

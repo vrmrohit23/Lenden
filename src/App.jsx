@@ -5,20 +5,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from './components/Header and footer/Header';
 import Footer from './components/Header and footer/footer';
 import authobject from './appwrite/authenticate';
-import { login, logout, setusers } from './contexts/authslice';
-import { setexpenses } from './contexts/expenseslice';
-import documentobject from './appwrite/getdata';
+import { login, logout} from './contexts/authslice';
 
-const App = () => {
+function App() {
   const [loading, setloading] = useState(true)
   const userstatus = useSelector((state) => state.auth.status)
   const dispatch = useDispatch()
+
+  // function for checking logged in user
   const checklogin = () => {
     authobject.getacc().then((response) => {
       if (response) {
         dispatch(login(response))
       }
       else {
+        // this function will logout locally because on intial load we are having a dummy login using local storage if on the server there is no user logged in from this device.
         if (userstatus) {
           localStorage.removeItem('token');
           dispatch(logout())
@@ -31,8 +32,9 @@ const App = () => {
       .finally(() => {
         setloading(false)
       })
-
   }
+
+  // useeffect for checking currently logged in user
   useEffect(() => {
     try {
       let token = localStorage.getItem('token')

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Input, Commonbutton, Selectfield } from './index'
+import { Input, Commonbutton, Selectfield } from '../components/index'
 import { useForm } from 'react-hook-form'
 import queryobject from '../appwrite/Contact_pagequeries'
 
@@ -25,7 +25,6 @@ function Contact() {
   const querysubmit = (data) => {
     
     try {
-      console.log({...data})
       queryobject.sendquery({ ...data })
         .then((response) => {
           if (response) {
@@ -33,13 +32,12 @@ function Contact() {
             submission()
             setValue('name', '')
             setValue('email', '')
-            // setValue('purpose','')
             setValue('message', '')
           }
         })
 
     } catch (error) {
-      console.log('error in the contact page' + error)
+      console.log('error in the contact page -->' + error)
     }
   }
   useEffect(() => {

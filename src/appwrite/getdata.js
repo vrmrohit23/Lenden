@@ -61,7 +61,7 @@ import config from "../config";
     }
     async listdocuments(userid){
         try {
-            console.log(userid)
+           
             
             return await this.database.listDocuments(
                 config.database,config.expenses,[

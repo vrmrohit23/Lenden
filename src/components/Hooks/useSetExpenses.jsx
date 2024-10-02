@@ -70,9 +70,7 @@ function useSetExpenses() {
    
     let filterexpense = expenseslist;
     useEffect(()=>{
-      console.log("we are in filters useeffect")
       if(selectedfilters["Category"] !== undefined && selectedfilters["Category"].length > 0){
-        console.log("checking Category")
         let Categoryfilter = []
         selectedfilters["Category"].map((options)=>
           Categoryfilter = [...Categoryfilter,...filterexpense.filter((item)=>item.category === options)]
@@ -80,7 +78,6 @@ function useSetExpenses() {
       filterexpense = Categoryfilter;
     }
     if(selectedfilters["P_Method"] !== undefined && selectedfilters["P_Method"].length > 0){
-      console.log("checking Payment Method")
       let Pmethodfilter = []
       selectedfilters["P_Method"].map((options)=>
         Pmethodfilter = [...Pmethodfilter,...filterexpense.filter((item)=>item.Method === options)]

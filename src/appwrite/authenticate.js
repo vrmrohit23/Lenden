@@ -11,11 +11,8 @@ class authservice{
     }
     async createacc({email,password,Name}){
         try {
-            let createacc =  await this.account.create(ID.unique(),email,password,Name)
-            if(createacc){
-               
-              await this.login({email,password})
-            }
+            return  await this.account.create(ID.unique(),email,password,Name)
+           
 
         } catch (error) {
             console.log('Appwrite error---> &nbsp;'+error)

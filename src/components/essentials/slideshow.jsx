@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {Commonbutton} from './index'
+import {Commonbutton} from '../index'
 import { Link } from 'react-router-dom'
 function Slideshow() {
    

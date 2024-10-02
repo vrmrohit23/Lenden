@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Slideshow from './slideshow'
+import {Slideshow} from '../components/index'
 function Home() {
   
   return (

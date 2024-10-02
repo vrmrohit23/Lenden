@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { Input, Commonbutton, Input_Pass_field } from './index'
+import { Input, Commonbutton, Input_Pass_field } from '../components/index'
 import authobject from '../appwrite/authenticate'
-import { login as locallogin } from '../contexts/authslice'
+import { login } from '../contexts/authslice'
 import { useForm } from 'react-hook-form'
 
 function Signup() {
@@ -18,8 +18,9 @@ function Signup() {
       const response = await authobject.createacc(data)
       if (response) {
         const userdata = await authobject.getacc()
+        console.log(userdata)
         if (userdata) {
-          dispatch(locallogin(userdata))
+          dispatch(login(userdata))
         }
         navigate('/')
       }

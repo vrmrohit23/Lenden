@@ -1,7 +1,7 @@
 import React, { useState,useEffect,useMemo } from 'react'
-import { Lendingsform, Selectfield, Render_rows, Modalbox,Filter } from './index'
-import useFilters from './Hooks/useFilters'
-import useSetLendings from './Hooks/useSetLendings'
+import { Lendingsform, Selectfield, Render_rows, Modalbox,Filter } from '../components/index'
+import useFilters from '../components/Hooks/useFilters'
+import useSetLendings from '../components/Hooks/useSetLendings'
 function Lendings() {
   
   const {lendingslist,setselectedfilters,months,month,setmonth,year,setyear,years,borrowerslist} = useSetLendings();
@@ -15,7 +15,7 @@ function Lendings() {
     "Method":['Cash', 'Recharge/Bills', 'Paytm', 'Google Pay', 'Contribution'],
     "Borrowers":borrowerslist
   }
-  console.log(lendingslist)
+
 
 
   return (

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useId } from 'react'
-import { Input, Selectfield, Commonbutton, Expenses } from '../index'
+import { Input, Selectfield, Commonbutton } from '../index'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { update_lending, addlending } from '../../contexts/lendingsSlice'
 import lending_object from '../../appwrite/getlendingsdata'
+import { ID } from 'appwrite'
 
 function Lendingsform({
   viewstate,
@@ -52,7 +53,7 @@ function Lendingsform({
     }
     else {
       if (user.$id === "Guest") {
-        const createobject = { userid: user.$id, $id: createresponse.$id, ...data, Amount: data.Amount,Day:day, Month: month, Year: year, Repayments: [], Repayments_Objects: [] }
+        const createobject = { userid: user.$id, $id: ID.unique(), ...data, Amount: data.Amount,Day:day, Month: month, Year: year, Repayments: [], Repayments_Objects: [] }
         dispatch(addlending(createobject))
       }
       else {

@@ -14,7 +14,7 @@ function useSetLendings() {
       })
       data.Repayments_Objects = array
     })
-    dispatch(setlendings(docu)); console.log(response.documents)
+    dispatch(setlendings(docu));
   }
   let loaded = useSelector((state) => state.lending.loaded)
   let auth = useSelector((state) => state.auth.userdata)
@@ -71,7 +71,6 @@ function useSetLendings() {
 
   let filterlending = lendingslist;
   useEffect(() => {
-    console.log("we are in filters useeffect")
     if (selectedfilters["Method"] !== undefined && selectedfilters["Method"].length > 0) {
 
       let Categoryfilter = []
@@ -94,7 +93,6 @@ function useSetLendings() {
     setfiltered(filterlending)
   }, [selectedfilters, month, lendingslist])
 
-  console.log(filtered)
   lendingslist = filtered;
 
   lendingslist = lendingslist.filter((lending) => lending.Month === month && lending.Year === year)

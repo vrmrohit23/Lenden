@@ -25,7 +25,7 @@ function Filter({ categoryoptions, filteroptions,setselectedfilters}) {
         }
         setselectedfilters(newfilterobject);
         setdisplay(false)
-        console.log(newfilterobject);
+    
     }
     const handleCheckboxChange = (category, member) => {
         setselectedoptions(prevState => {
